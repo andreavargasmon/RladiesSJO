@@ -1,3 +1,8 @@
+## Esta es una traducción de este sitio: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html que tiene 
+## licencia CC que permite usarlo, modificarlo pero no sacar provecho comercial.
+
+## inicio de la clase:
+
 ##Para hacer comentarios se necesita usar el símbolo "#" o seleccionar lo que se quiere poner como 
 ##comentario y oprimir Ctrl+Shift+c
 
