@@ -1,3 +1,8 @@
+## Este script es una traducción de: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html y de: 
+## http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html, que tienen licencia CC-BY que 
+## significa que pueden ser reusados o adaptados si solo si reconoce el mérito de los autores: François Michonneau, Auriel Fournier.
+
+
 ##Para hacer comentarios se necesita usar el símbolo "#" o seleccionar lo que se quiere poner como 
 ##comentario y oprimir Ctrl+Shift+c
 
