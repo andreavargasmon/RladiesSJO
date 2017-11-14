@@ -1,19 +1,19 @@
-##Para hacer comentarios se necesita usar el s√≠mbolo "#" o seleccionar lo que se quiere poner como 
+##Para hacer comentarios se necesita usar el sÌmbolo "#" o seleccionar lo que se quiere poner como 
 ##comentario y oprimir Ctrl+Shift+c
 
 por ejemplo
 
-##Se pueden obtener resultados con solo poner operaciones matem√°ticas
+##Se pueden obtener resultados con solo poner operaciones matem·ticas
 5*4
 9-3
 20/2
 
-##Tambi√©n se pueden asignar valores a objetos
+##TambiÈn se pueden asignar valores a objetos
 peso_kg<-50
-#para asignar valores se puede usar el s√≠mbolo "<-" o "=", ambos cumplen la misma funci√≥n
+#para asignar valores se puede usar el sÌmbolo "<-" o "=", ambos cumplen la misma funciÛn
 
 #los objetos pueden tener diferentes nombres, puede ser una letra o una palabra; sin embargo
-#no se puede iniciar con un n√∫mero.
+#no se puede iniciar con un n˙mero.
 2x<-5
 x2<-5
 
@@ -35,7 +35,7 @@ peso_lb<-2.2*peso_kg
 peso_lb
 
 ##EJERCICIO##
-#¬øC√∫al es el valor de los siguientes objetos?
+#øC˙al es el valor de los siguientes objetos?
 
 masa<-47
 edad<-80
@@ -55,13 +55,13 @@ round(c)
 round(c, digits = 3)
 round(c,3)
 
-#si no se sabe los argumentos de una funci√≥n se puede usar 
+#si no se sabe los argumentos de una funciÛn se puede usar 
 args(round)
 
-#o tambi√©n 
+#o tambiÈn 
 ?round
 
-##Podemos crear objetos que contengan m√É¬°s de un valor. Para esto se usan vectores 
+##Podemos crear objetos que contengan m√°s de un valor. Para esto se usan vectores 
 ##Se definen de la siguiente manera 
 peso= c(30,49,55,76)
 peso
@@ -74,10 +74,10 @@ length(peso) ##me da el numero de objetos
 class(peso)   ##numericos o carateres 
 class(animales)
 
-str(peso)  #descripci√É¬≥n 
+str(peso)  #descripci√≥n 
 str(animales)
 
-##si necesitamos a√É¬±adir un valor a nuestro vector
+##si necesitamos a√±adir un valor a nuestro vector
 peso=c(45,peso)
 peso
 
@@ -111,9 +111,9 @@ peso[peso<=40 & peso ==30]
 animales[animales == "rata" | animales == "gallina"]
 animales
 
-##Si un nuestro vector tenemos valores nulos o faltantes de informaci√É¬≥n 
+##Si un nuestro vector tenemos valores nulos o faltantes de informaci√≥n 
 numeros= c(2, 4, 4, NA, 6)
-#Si queremos hacer algun c√É¬°lculo con el vector
+#Si queremos hacer algun c√°lculo con el vector
 mean(numeros) #calcular la media 
 
 ##Puedo decirle a R que no me tome en cuenta los valores faltantes 
@@ -126,21 +126,21 @@ numeros[complete.cases(numeros)]
 
 mean(numeros[complete.cases(numeros)])
 
-########      #######
+###COMENZANDO CON DATOS####
 
-#Data.frame es la estructura usada para la mayor√≠a de las estructuras de tabulaci√≥n de datos. 
-#Se usa para obtener estad√≠sticas y graficar. 
+#Data.frame es la estructura usada para la mayorÌa de las estructuras de tabulaciÛn de datos. 
+#Se usa para obtener estadÌsticas y graficar. 
 
 #Se puede generar a mano o utilizar funciones como: 
 1.read.csv()
 2.read.table()
 
-#Un data.frame es la representaci√≥n de datos en un formato de tablas donde las columnas son vectores y todos los vectores tienen el mismo largoy el mismo tipo de datos, por ejemplo: 
-#Una vez que se tiene un data.frame se puede ver mediante la funci√≥n str()
+#Un data.frame es la representaciÛn de datos en un formato de tablas donde las columnas son vectores y todos los vectores tienen el mismo largoy el mismo tipo de datos, por ejemplo: 
+#Una vez que se tiene un data.frame se puede ver mediante la funciÛn str()
 
 #Ejercicio:
 #Defina un vector que contenga los datos:
-
+ 
 name <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
 type <- c("Terrestrial planet", "Terrestrial planet", "Terrestrial planet", 
           "Terrestrial planet", "Gas giant", "Gas giant", "Gas giant", "Gas giant")
@@ -156,8 +156,8 @@ str(planets_df)
 
 #Inspeccionando un data frame
 
-#As√≠ como la funci√≥n de str, hay otras formas de inspeccionarlo. 
-#Para ver el tama√±o o la longitud. 
+#AsÌ como la funciÛn de str, hay otras formas de inspeccionarlo. 
+#Para ver el tamaÒo o la longitud. 
 
 #Me permite ver las filas en el primer elemento y las columnas en el segundo elemento
 dim(planets_df) 
@@ -165,14 +165,14 @@ dim(planets_df)
 #Me indica la cantidad de filas. 
 nrow(planets_df)
 
-#Me indica el n√∫mero de columnas. 
+#Me indica el n˙mero de columnas. 
 ncol(planets_df) 
 
 #Contenido
 #Muestra las 6 primeras filas  
 head(planets_df) 
 
-#Muestra las √∫ltimas 6 filas 
+#Muestra las ˙ltimas 6 filas 
 tail(planets_df) 
 
 #Nombres
@@ -185,13 +185,13 @@ rownames(planets_df)
 #Resumen 
 
 #Summary:
-#Muestra las estad√≠sticas de cada columna. 
+#Muestra las estadÌsticas de cada columna. 
 summary(planets_df)
 
 #Subconjuntos 
 
 #Ya sabemos que un data frame contiene filas y columnas, pero si queremos extraer algo en especifico necesitamos darle coordenadas de lo que queremos extraer. Las filas van primero, seguidas de las columnas. Hay muchas formas de espcificarlo esas coordenadas, entre ellas estan:
-
+  
 planets_df[1, 1]   #El primer elemento en la primer columna   
 planets_df[1, 2]   # El primer elemento en la segunda columna 
 planets_df[, 1]    #La primer columna 
@@ -205,9 +205,9 @@ planets_df[,-1]          # Todos los datos dentro de dataframe menos la primer c
 planets_df[-c(1:3),]     # Todos los elementos dentro de dataframe menos las filas del 1 a 3. 
 
 #Factores: 
-#Los factores usualmente son usados para representar caregorias de datos. Los factores pueden estar ordenados o desordenados, son necesarios para graficar y obtener estaditicas. 
+#  Los factores usualmente son usados para representar caregorias de datos. Los factores pueden estar ordenados o desordenados, son necesarios para graficar y obtener estaditicas. 
 
-#Se puede convertir un vector no n√∫merico a factor, Por ejemplo:
+#Se puede convertir un vector no n˙merico a factor, Por ejemplo:
 sex <- factor(c("male", "female", "female", "male"))
 
 #Y se pueden ver sus niveles para categorizarlo
@@ -215,16 +215,16 @@ sex <- factor(c("male", "female", "female", "male"))
 levels(sex)
 nlevels(sex)
 
-#En algunas ocaciones el orden de los elementos dentro de un vector que fun convertido en factor no importa pero en este caso vamos a asignarle nombre a los elementos dentro de √©l seg√∫n el orden que indica el vector. 
+#En algunas ocaciones el orden de los elementos dentro de un vector que fue convertido en factor no importa pero en este caso vamos a asignarle nombre a los elementos dentro de Èl seg˙n el orden que indica el vector. 
 sex <- factor(sex, levels = c("male", "female"))
 
-#Tambi√©n se puede convertir un factor en caracter, usando as.character(x):
-as.character(sex)
+#TambiÈn se puede convertir un factor en caracter, usando as.character(x):
+as.character(sex) 
 
-#¬øQu√© hacer cuando se tiene factores donde los niveles son n√∫meros (ejemplo: a√±os)?
-
-#La funci√≥n as.numeric(x) devuelve los valores de √≠ndice del factor, no sus niveles, 
-#por lo que dar√° como resultado un conjunto de n√∫meros completamente nuevo (y no deseado en este caso). 
+#øQuÈ hacer cuando se tiene factores donde los niveles son n˙meros (ejemplo: aÒos)?
+  
+#La funciÛn as.numeric(x) devuelve los valores de Ìndice del factor, no sus niveles, 
+#por lo que dar· como resultado un conjunto de n˙meros completamente nuevo (y no deseado en este caso). 
 
 ###Solucion: Convertir los factores en caracteres y luego en numeros
 
@@ -234,12 +234,11 @@ as.numeric(as.character(f)) # Funciona..
 as.numeric(levels(f))[f]    # Forma recomendada
 
 ###Factores de cambio de nombre:
-
-#Si se quiere observar el n√∫mero de observaciones representadas por cada nivel de factor:
-
+  
+#Si se quiere observar el n˙mero de observaciones representadas por cada nivel de factor:
+ 
 ##barplot de la cantidad de planetas terrestres y gigantes gaseosos
 plot(planets_df$type)
-
 
 #Si se quiere cambiar el nombre a algun nivel de la variable factor:
 
@@ -251,20 +250,53 @@ levels(tipo_planeta)
 
 #Intentemos cambiar el nombre "Terrestrial planet"
 
-
 ###StringsAsFactors=FALSE
 #Al construir o importar una base de datos, las columnas que contienen caracteres (es decir, texto) 
 #se fuerzan (convierten) en tipo factor. Dependiendo de lo que quiera hacer con los datos, puede mantener estas columnas como caracter. 
 #Para hacerlo, read.csv() y read.table() tienen un argumento llamado stringsAsFactors que se puede configurar  con el argumento FALSE, para luego convertir en tipo factor solo las columnas que lo requieran.
 
+#Descargar el siguiente archivo de datos
+getwd()
+download.file("https://ndownloader.figshare.com/files/2292169" , "portal_data_joined.csv")
+getwd()
+#Cargar los datos
+surveys <- read.csv("portal_data_joined.csv")
 
-#Comparemos la diferencia entre leer los datos como "factor" y leere los datos como "caracter"
-surveys <- read.csv(" ", stringsAsFactors = TRUE)
+#Observemos lo que contiene
+head(surveys)
+
+#Comparemos la diferencia entre leer los datos como "factor" y leer los datos como "caracter"
+surveys <- read.csv(file="portal_data_joined.csv", stringsAsFactors = TRUE)
 str(surveys)
-surveys <- read.csv("data/portal_data_joined.csv", stringsAsFactors = FALSE)
+
+surveys <- read.csv("portal_data_joined.csv", stringsAsFactors = FALSE)
 str(surveys)
 
 ###Fechas de formato
-#La mejor pr√°ctica para tratar con los datos de fecha es garantizar que cada componente de su fecha 
+#La mejor pr·ctica para tratar con los datos de fecha es garantizar que cada componente de su fecha 
 #se almacene como una variable separada. 
+str(surveys)
 
+#Cargar la librerÌa lubridate, para utilizar la funciÛn ymd()
+library(lubridate)
+
+#Crear un vector de caracteres con aÒo, mes y dÌa
+paste(surveys$year, surveys$month, surveys$day, sep = "-")
+
+#Este vector de caracteres se puede usar como argumento para ymd():
+ymd(paste(surveys$year, surveys$month, surveys$day, sep = "-"))
+
+#El vector POSIXct (es una clase de datos reconocidos por R como una fecha o fecha y hora) 
+#resultante se puede agregar a surveys como una nueva columna llamada date:
+surveys$date <- ymd(paste(surveys$year, surveys$month, surveys$day, sep = "-"))
+str(surveys)
+
+### WARNING MESSAGE###
+
+#Identificar las filas en nuestro marco de datos que est·n fallando. 
+#Primero, creemos un vector que contenga nuestras fechas como un vector de caracteres:
+surveys_dates <- paste(surveys$year, surveys$month, surveys$day, sep = "-")
+head(surveys_dates)
+
+#Usar la funciÛn is.na() en el marco de datos para localizar los elementos que no pudieron analizarse:
+surveys_dates[is.na(surveys$date)]
