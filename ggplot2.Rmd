@@ -45,8 +45,11 @@ Photoshop, Illustrator, o Inkscape.
 
 Algunos recursos útiles antes de empezar la lección:
 
-- [ggplot2][ggplot2]: http://ggplot2.org/
-- [Cheat Sheet][Cheat Sheet]: https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+- [ggplot2 WebPage][ggplot22]
+- [Cheat Sheet][CheatSheet]
+
+[ggplot22]: http://ggplot2.org/
+[CheatSheet]: https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
 Comencemos explicando un poco los datos y luego con un ejemplo:
 
