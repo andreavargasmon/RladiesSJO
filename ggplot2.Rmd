@@ -11,6 +11,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Avisos antes de iniciar: 
+
+- ¡Pasen la voz, por fa! El grupo está creciendo en redes, pero queremos ver más comunidad.
+- No duden en compartir lo que saben. Todas estamos aquí para aprender y todas podemos aprender algo de todas.
+- Reunión de usuarios de R en línea el próximo 28 de enero: [San Carlos R User Group][https://www.meetup.com/San-Carlos-R-User-Group/]. Frans explicará cómo hacer su propio Website usando R y Github. 
+
 
 ### Data Visualization with ggplot2 from [Gapminder Software Carpentry][GapminderSC]
 
@@ -37,6 +43,10 @@ La clave para entender ggplot2 es pensar en una figura como un conjunto de capas
 Esta idea podría resultarte familiar si has usado un programa de edición de imágenes como 
 Photoshop, Illustrator, o Inkscape.
 
+Algunos recursos útiles antes de empezar la lección:
+
+[ggplot2][http://ggplot2.org/]
+[Cheat Sheet][https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf]
 
 Comencemos explicando un poco los datos y luego con un ejemplo:
 
