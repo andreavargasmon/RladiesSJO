@@ -13,9 +13,9 @@ Follow us:
 
 **Primera reunión**
 
-- Principios de R: 
-- Datos necesarios:
+- [Principios de R](https://github.com/malfaro2/RladiesSJO/blob/master/Rladies.R)
+- [Datos necesarios](https://github.com/malfaro2/RladiesSJO/blob/master/combined.csv)
 
 **Segunda reunión**
 
-- Ggplot2: 
+- [ggplot2](https://github.com/malfaro2/RladiesSJO/blob/master/ggplot2.Rmd)
