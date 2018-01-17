@@ -5,4 +5,7 @@ Aquí pondremos todos los archivos necesarios para las clases, workshops y tutor
 Si tenés sugerencias, o si querés presentar en nuestra clase podés escribirnos:
 
 sanjoseCR@rladies.org 
-<a href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+Follow us: 
+- https://twitter.com/RladiesCR
+- https://www.facebook.com/R-Ladies-San-Jos%C3%A9-CR-113831192660935/
