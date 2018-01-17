@@ -9,3 +9,13 @@ sanjoseCR@rladies.org
 Follow us: 
 - https://twitter.com/RladiesCR
 - https://www.facebook.com/R-Ladies-San-Jos%C3%A9-CR-113831192660935/
+
+
+**Primera reunión**
+
+- Principios de R: 
+- Datos necesarios:
+
+**Segunda reunión**
+
+- Ggplot2: 
