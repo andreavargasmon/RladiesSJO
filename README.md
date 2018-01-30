@@ -42,5 +42,5 @@ Lugar: IBM Innovation Hub
 
 Dirección: Los Yoses San José, de la tienda Arenas 300mts Sur y 250mts Oeste.
 
-Waze: Impact Hub
+Waze: [Impact Hub](https://www.waze.com/livemap?zoom=17&lat=9.92825&lon=-84.06164)
 
