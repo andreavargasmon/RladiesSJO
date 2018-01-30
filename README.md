@@ -19,3 +19,12 @@ Follow us:
 **Segunda reunión**
 
 - [ggplot2](https://github.com/malfaro2/RladiesSJO/blob/master/ggplot2.Rmd)
+
+
+**Tercera reunión (Martes 6 de febrero 2018)**
+
+- [Rmarkdown (propuesta)](https://github.com/mine-cetinkaya-rundel/dukelib-workshop-rmarkdown/blob/master/rmarkdown.pdf)
+
+**Próximas reuniones**
+
+Martes 6 de marzo 2018, Martes 10 de abril 2018, Martes 8 de mayo 2018, Martes 5 de junio 2018, Martes 10 de julio 2018, Martes 7 de agosto 2018, Martes 4 de setiembre 2018, Martes 9 de octubre 2018, Martes 6 de noviembre 2018, Martes 4 de diciembre 2018.
