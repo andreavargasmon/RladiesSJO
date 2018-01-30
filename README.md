@@ -7,9 +7,9 @@ Si tenés sugerencias, o si querés presentar en nuestra clase podés escribirno
 sanjoseCR@rladies.org 
 
 Follow us: 
-- https://twitter.com/RladiesCR
-- https://www.facebook.com/R-Ladies-San-Jos%C3%A9-CR-113831192660935/
-
+- [Twitter](https://twitter.com/RladiesCR)
+- [Facebook](https://www.facebook.com/R-Ladies-San-Jos%C3%A9-CR-113831192660935/)
+- [Meetup](meetup.com/rladies-san-jose)
 
 **Primera reunión**
 
