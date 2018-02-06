@@ -25,6 +25,7 @@ Seguinos:
 
 - [Rmarkdown (propuesta en inglés)](https://github.com/mine-cetinkaya-rundel/dukelib-workshop-rmarkdown/blob/master/rmarkdown.pdf)
 - [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Rmarkdown.Rmd)
+- [Imagen (tienen que descargarla y ponerla en su working directory)](https://github.com/malfaro2/RladiesSJO/blob/master/boards.jpg)
 
 **Próximas reuniones (2018)**
 
