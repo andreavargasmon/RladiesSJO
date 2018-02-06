@@ -90,6 +90,6 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
 #Graficos
 ```{r}
 attach(cars)
-plot(speed,dis:t)
+plot(speed,dist)
 ```
 
