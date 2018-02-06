@@ -1,0 +1,95 @@
+---
+title: "R Markdown"
+author: "R ladies"
+date: "6 de febrero de 2018"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+¿Qué es R Markdown?
+
+**Este  es un documento de R Markdown, a partir de un documento de este tipo se puede convertir a HTML, Word y muchos otros.** 
+
+Mi primer documento en R Markdown.
+
+**R Markdown es un formato simple en sintaxis. Cuando usted le da click a Knit se va e generar un documento, este va incluir ambos contenidos, como lo son output de cualquier información que este entre los chunks.**
+
+#Ejercicio:
+1.En Rstudio haga una copia de este documento y guardelo como "primermd"
+Pasos:
+
+2.Vaya a Files (archivos) -> new file (nuevo archivo)-> R Markdown.
+
+3.Asisgne un título: "primermd"
+Autor: Su Nombre.
+
+4. Darle click en Knit.
+
+#Chunks:
+Código de los  chunks:
+Para insertar un chunk
+‣ Podemos usar, Insertar en la barra de herramientas. 
+‣ estará delimitado por ```{r} & ```
+‣ O usando el comando Ctrl + Alt + I (OS X: Cmd + Option + I)
+‣ cuando corren el chunk les va a generar la salidas en la parte de abajo. 
+
+#Componiendo su Prosa:
+
+Texto:
+Sele puede dar formato o puede decorarlo o bien diferenciarlo con:
+
+1.*italic*
+2.**negrita**
+
+#Links:
+Puede ser en el formato http para direccionarlos o agregar un link a una frase:
+
+Ejemplo:
+
+[Google](https://www.google.com)
+
+
+Los Encabezados usan  #s
+#Encabezado 1
+## Encabezado 2
+### Encabezado 3
+
+#Imagenes
+
+![Tierra](boards.jpg)
+
+
+#Complete el conjunto de opciones de chunks 
+
+#Opciones de ajuste de chunks via GUI 
+
+Algunas de las opciones de los chunk se pueden ajustar vía el práctico GUI el cual se puede accesar al hacer click  en el ícono de engranaje en el chunk dado. 
+
+#Opciones globales
+
+Para establecer opciones globales que aplican para cualquier chunk en su archivo puede utilizar:
+```{r}
+knitr::opts_chunk$set
+```
+
+Sirve para no tener que escribir los mismos settings en cada uno de los chunks. 
+
+```{r}
+knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
+                      echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+#Todas las figuras van a tener  ese tamaño, vengan de ese archivo, y que no tengan ni warning, ni mensaje ni echo.
+
+#Graficos
+```{r}
+attach(cars)
+plot(speed,dis:t)
+```
+
