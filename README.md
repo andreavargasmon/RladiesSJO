@@ -23,7 +23,8 @@ Seguinos:
 
 **Tercera reunión (Martes 6 de febrero 2018)**
 
-- [Rmarkdown (propuesta)](https://github.com/mine-cetinkaya-rundel/dukelib-workshop-rmarkdown/blob/master/rmarkdown.pdf)
+- [Rmarkdown (propuesta en inglés)](https://github.com/mine-cetinkaya-rundel/dukelib-workshop-rmarkdown/blob/master/rmarkdown.pdf)
+- [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Rmarkdown.Rmd)
 
 **Próximas reuniones (2018)**
 
