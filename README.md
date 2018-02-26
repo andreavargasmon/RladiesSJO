@@ -27,9 +27,14 @@ Seguinos:
 - [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Rmarkdown.Rmd)
 - [Imagen (tienen que descargarla y ponerla en su working directory)](https://github.com/malfaro2/RladiesSJO/blob/master/boards.jpg)
 
+**Cuarta reunión (Martes 6 de marzo 2018)**
+
+- [Shiny (propuesta en inglés)](http://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
+- [Código de hoy]()
+- [Imágenes (tienen que descargarlas y ponerlas en su working directory)]()
+
 **Próximas reuniones (2018)**
 
-- Martes 6 de marzo
 - Martes 10 de abril
 - Martes 8 de mayo
 - Martes 5 de junio
