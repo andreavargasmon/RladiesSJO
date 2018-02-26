@@ -31,7 +31,7 @@ Seguinos:
 
 - [Shiny (propuesta en inglés)](http://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
 - [Código de hoy]()
-- [Imágenes (tienen que descargarlas y ponerlas en su working directory)]()
+- [Hoja Resumen](http://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
 **Próximas reuniones (2018)**
 
