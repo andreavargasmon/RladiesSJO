@@ -9,7 +9,7 @@ sanjoseCR@rladies.org
 Seguinos: 
 - [Twitter](https://twitter.com/RladiesCR)
 - [Facebook](https://www.facebook.com/R-Ladies-San-Jos%C3%A9-CR-113831192660935/)
-- [Meetup](meetup.com/rladies-san-jose)
+- [Meetup](https://www.meetup.com/rladies-san-jose)
 
 **Primera reunión (octubre 2017)**
 
