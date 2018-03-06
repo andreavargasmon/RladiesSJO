@@ -30,7 +30,7 @@ Seguinos:
 **Cuarta reunión (Martes 6 de marzo 2018)**
 
 - [Shiny (propuesta en inglés)](http://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
-- [Código de hoy]()
+- [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Shiny_RladiesSJO.Rmd)
 - [Hoja Resumen](http://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
 **Próximas reuniones (2018)**
