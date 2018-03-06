@@ -1,0 +1,763 @@
+---
+title: "Shiny"
+author: "Andrea Alfaro"
+date: "27 de febrero de 2018"
+output:
+  html_document: default
+  pdf_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+
+
+Lección 1.
+
+
+                                    **Bienvenidas a Shiny**
+                                    
+Shiny es un paquete de R que hace a R más fácil de construir una interacción web con aplicaciones directas de R.
+
+Esta lección va a iniciarlas en la construccion de aplicaciones con Shiny. 
+Si usted no ha instalado el paquete de Shiny, abra una seccion de R, connectese a internet, y corralo. 
+
+Use el comando:
+```{r}
+install.packages("shiny")
+library(shiny)
+```
+
+
+
+Ejemplo de una interfaz:
+
+i1
+
+
+El paquete de Shiny tiene 11 ejemplos que demuestran como funciona Shiny. Cada uno de estos ejemplos contiene una propia app de Shiny. 
+Esos 11 ejemplos son:
+```{r}
+runExample("01_hello")      # a histogram
+runExample("02_text")       # tables and data frames
+runExample("03_reactivity") # a reactive expression
+runExample("04_mpg")        # global variables
+runExample("05_sliders")    # slider bars
+runExample("06_tabsets")    # tabbed panels
+runExample("07_widgets")    # help text and submit buttons
+runExample("08_html")       # Shiny app built from HTML
+runExample("09_upload")     # file upload wizard
+runExample("10_download")   # file download wizard
+runExample("11_timer")      # an automated timer
+
+```
+
+
+
+Hello Shiny ejemplifica los gráficos e histogramas de R-faithful dataset con una configuración numérica de contenedores. Los usuarios pueden cambiar los contenedores numéricos con una barra deslizadora, y la app inmediatamente responde a su input. Usted puede usar *Hello Shiny* para explorar la estructura de una aplicacion Shiny y crear su primera aplicación.
+
+
+
+Para correr Hello Shiny, use: 
+
+```{r}
+library(shiny)
+runExample("01_hello")
+```
+
+
+Estructura de una app Shiny:
+
+Las apps de Shiny están contenidas en un solo scrip llamado app.R.
+
+El scrip de app.R se encuentra en un directorio (por ejemplo, newdir/) y una app que puede correrse con runApp("newdir").
+
+app.R tiene tres componetes:
+
+•a user interface object
+
+•a server function
+
+•a call to the shinyApp function
+
+Los usuarios de la interfaz *(ui)* controlan el diseño y apariencia de su app. El server contiene funciones de intrucciones que su computadora necesita para construir su app. Finalmente ShinyApp tiene como función crear Shinyapps desde una explícita UI/server par.
+Nota: Anteriormente la versión 0.10.2, Shiny no suportaba un archivo único de apps y el UI objeto y server funcion necesitaba estar contenido en scrips separados llamdaos ui.R y server.R, respectivamente. 
+
+
+Esta funcionalidad continua dándole soporte a Shiny, como siempre el tutorial y mucho del suporte docuemntal esta enfocado en un único archivo de aplicaciones. 
+
+
+Lo bueno del futuro de las apps de Shiny-File es que usted puede copiar y pegar toda la app en la consola de R, lo cual hace más fácil compartir rapidamente el código para otros experimentos con este código. 
+
+
+Por ejemplo, si usted copia y pega el código encima de una linea de comandos en R, este va a empezar una app de shiny. 
+
+                                                   *ui*
+
+Este es un ejemplo de un objeto ui por *Hello Shiny*:
+
+
+```{r}
+library(shiny)
+# Define UI for app that draws a histogram ----
+ui <- fluidPage(
+
+  # App title ----
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+
+    )
+  )
+)
+ui
+```
+
+
+Aquí esta la función para *Hello Shiny*:
+
+
+```{r}
+
+# Define server logic required to draw a histogram ----
+server <- function(input, output) {
+ # Histogram of the Old Faithful Geyser Data ----
+  # with requested number of bins
+  # This expression that generates a histogram is wrapped in a call
+  # to renderPlot to indicate that:
+  #
+  # 1. It is "reactive" and therefore should be automatically
+  #    re-executed when inputs (input$bins) change
+  # 2. Its output type is a plot
+  output$distPlot <- renderPlot({
+
+    x    <- faithful$waiting
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = "#75AADB", border = "white",
+         xlab = "Waiting time to next eruption (in mins)",
+         main = "Histogram of waiting times")
+
+    })
+
+}
+
+```
+
+En primera instancia, Hello Shiny server is muy simple. El script hace algunos calcúlos y despúes los gráfica con las solictudes  numéricas de los contenedores. 
+ 
+Como siempre, usted podrá también notar que la mayoría de los script estan en un archivo llamado "renderPlot". 
+
+Juegue con las app de Shiny y revise las funtes de los códigos. Intente desarrollar un espacio para ver como funcion an las aplicaiones. Pero antes usted debería notar que in su app.R file usted necesitara inociar con cargar los paquetes de Shimy y al final llamar la librería:
+
+
+
+```{r}
+library(shiny)
+
+# See above for the definitions of ui and server
+ui <- ...
+
+server <- ...
+
+shinyApp(ui = ui, server = server)
+
+```
+
+Su seción en R va a estar ocupada mientras Hello Shiny app esté activa, así que usted no debéra correr nada más en R, no corra comando ni ningún otro tipo de archivos. R estpa 
+
+
+
+
+                                               **Corriendo una App**
+Toda aplicación de Shiny tiene la misma estructura: una app.R file que contiene ui y server. Usted puede crear una App shiny hciendo un nuevo directorio y salvando un en app.R file. Usted puede correr una App Shiny dandole el nombre en el directorio en la función runApp. por ejemplo:
+```{r}
+runApp("my_app")
+
+```
+
+
+Ó abra la app.R en su Rstudio editor. Rstudio va a reconocer el script de shiny y mostar la eleccion de Run App (encima del editor). También dele click al botton de cargar en su app o use el teclado rápido:
+```{r}
+ #(Control+Shift+Enter on Windows).
+```
+
+
+
+
+Nota: runApp es similar a read.csv, read.table y muchos otros comandos en R. El primer argumento de runApp es la ruta del archivo del directorio donde se va a trabajas la App. El código asume que el directorio de la app está funcionando. 
+
+
+Su turno:
+Cree un nuevo directorio llamado App-1 en su directorio de trabajo. Despúes copie y pegue la app.R script encima en su directorio(el script de Hello Shiny). Cuando usted este terminando el directorio debería luciar así: 
+
+
+
+Example folder
+
+
+Cargue la aplicación corriendo "runApp("App-1")". Despues dele click en escape y haga algunos cambios a su app:
+
+Cambie Hello Shiny por Hello World
+
+Seleccione el valor mpinimo de valores en la barra a 5. 
+Cambie el color del borde del  histogrma  de blanco a naramja.
+
+Cuando esté listo, cargue su app otra vez. Su nueva app debería calzar con la imagen detrás. Si eso no es asi o si usted quiere revisar el código, presione el modelo answers button para revelar como hicimos esa tarea. 
+
+
+Modificando Hello shiny screenshot: 
+
+Por default, las plaicaiones de Shiny desplegan en "Normal" mode, como la imagen encima. Hello Shiny y los otros ejemplos desplgan en "Showcase mode", a diferencia del modo que desplega app.R script
+
+Sí usted quiere que su app desplegie en showcase mode, usted puede corer:
+```{r}
+runApp("App-1", display.mode = "showcase")
+```
+
+
+Relaunching Apps
+To relaunch your Shiny app:
+
+Run runApp("App-1"), or
+
+Open the app.R script in your RStudio editor. RStudio will recognize the Shiny script and provide a Run App button (at the top of the editor). Either click this button to launch your app or use the keyboard shortcut: Command+Shift+Enter (Control+Shift+Enter on Windows).
+
+Run app button
+
+Rstudi va a cargar la app en una nueva ventana por default, pero usted puede elegir si cargar la app
+elijiendo que la aplicación se inicie en un panel de visor dedicado o en su navegador web externo. Haga su selección haciendo clic en el ícono al lado de Ejecutar aplicación.
+
+Opciones para cargar:
+
+Recap: Para crear su propia app Shiny:
+
+
+Make a directory named myapp/ for your app.
+
+Save your app.R script inside that directory.
+
+Launch the app with runApp or RStudio’s keyboard shortcuts.
+
+Exit the Shiny app by clicking escape.
+
+
+
+
+
+                                                 *Lección dos:*
+
+Construya una interfaz de usuario:
+
+
+Ahora que usted entiende la estrutura de Shiny app, es tiempo de construir su primera app.
+
+
+Usaremos App-1 que hicimos en la leccipon 1. Para empezar, abra app.R file. Edite el scrip para que calcen: 
+
+
+```{r}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+
+
+                                          *Diseño*
+                                          
+Siny usa la función fluidPage para crea un monitor que automaticamente ajusta las dimensiones las dimensiones del navegador de su  usuario. Ust
+Shiny uses the function fluidPage to create a display that automatically adjusts to the dimensions of your user’s browser window. Usted establece la interfaz de usuario de su aplicación colocando elementos en la función fluidPage.
+
+
+Por ejemplo, el ui función pertenece a los creadores de usurios de interfas que tiene un titulo de panel y un diseñor de barras a los lados como barras de herramientas. 
+
+
+
+```{r}
+ui <- fluidPage(
+  titlePanel("title panel"),
+
+  sidebarLayout(
+    sidebarPanel("sidebar panel"),
+    mainPanel("main panel")
+  )
+)
+```
+
+
+titlePanel y sidebarLayout son los dos elementos más populares para agregar a fluidPage. Crean una aplicación Shiny básica con una barra lateral.
+
+sidebarLayout siempre toma dos argumentos:
+
+Salida de la función sidebarPanel
+
+salida de función mainPanel
+
+Estas funciones colocan contenido en la barra lateral o en los paneles principales.
+
+El panel de la barra lateral aparecerá en el lado izquierdo de la aplicación de forma predeterminada. Puede moverlo al lado derecho dando a sidebarLayout el argumento opcional position = "right".
+
+```{r}
+ui <- fluidPage(
+  titlePanel("title panel"),
+  
+  sidebarLayout(position = "right",
+                sidebarPanel("sidebar panel"),
+                mainPanel("main panel")
+  )
+)
+```
+
+Contenido HTML
+Puede agregar contenido a su aplicación Shiny colocándolo dentro de una función * Panel. Por ejemplo, las aplicaciones anteriores muestran una cadena de caracteres en cada uno de sus paneles. Las palabras "panel de la barra lateral" aparecen en el panel de la barra lateral porque agregamos la cadena a la función barra lateralPanel, p. sidebarPanel ("panel de la barra lateral"). Lo mismo es cierto para el texto en el panel de título y el panel principal.
+
+Para agregar contenido más avanzado, use una de las funciones de etiqueta HTML de Shiny. Estas funciones son paralelas a las etiquetas HTML5 comunes. Probemos algunos de ellos.
+
+función brillante HTML5 equivalente crea
+p	<p>	A paragraph of text
+h1	<h1>	A first level header
+h2	<h2>	A second level header
+h3	<h3>	A third level header
+h4	<h4>	A fourth level header
+h5	<h5>	A fifth level header
+h6	<h6>	A sixth level header
+a	<a>	A hyper link
+br	<br>	A line break (e.g. a blank line)
+div	<div>	A division of text with a uniform style
+span	<span>	An in-line division of text with a uniform style
+pre	<pre>	Text ‘as is’ in a fixed width font
+code	<code>	A formatted block of code
+img	<img>	An image
+strong	<strong>	Bold text
+em	<em>	Italicized text
+HTML	 	Directly passes a character string as HTML code
+
+
+Encabezados
+
+
+Para crear un elemento de encabezado:
+
+seleccione una función de encabezado (p. ej., h1 o h5)
+
+dale el texto que quieres ver en el encabezado
+
+Por ejemplo, puede crear un encabezado de primer nivel que diga "Mi título" con h1 ("Mi título"). Si ejecuta el comando en la línea de comando, notará que produce código HTML.
+
+```{r}
+> library(shiny)
+> h1("My title")
+<h1>My title</h1>
+```
+To place the element in your app:
+
+pass h1("My title") as an argument to titlePanel, sidebarPanel, or mainPanel
+The text will appear in the corresponding panel of your web page. You can place multiple elements in the same panel if you separate them with a comma.
+
+Give this a try. The new script below uses all six levels of headers. Update your ui.R to match the script and then relaunch your app. Remember to relaunch a Shiny app you may run runApp("App-1"), click the Run App button, or use your keyboard shortcuts.
+```{r}
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      h1("First level title"),
+      h2("Second level title"),
+      h3("Third level title"),
+      h4("Fourth level title"),
+      h5("Fifth level title"),
+      h6("Sixth level title")
+    )
+  )
+)
+```
+Puede crear este efecto con align = "center", como en h6 ("Episodio IV", align = "center"). En general, cualquier atributo de etiqueta HTML se puede establecer como argumento en cualquier función de etiqueta Shiny.
+
+Si no está familiarizado con los atributos de las etiquetas HTML, puede buscarlos en uno de los muchos recursos HTML en línea gratuitos, como w3schools.
+
+Aquí está el código para la interfaz de usuario que hizo que la interfaz de usuario inspirada en Star Wars:
+
+
+
+
+```{r}
+ui <- fluidPage(
+  titlePanel("My Star Wars App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      h6("Episode IV", align = "center"),
+      h6("A NEW HOPE", align = "center"),
+      h5("It is a period of civil war.", align = "center"),
+      h4("Rebel spaceships, striking", align = "center"),
+      h3("from a hidden base, have won", align = "center"),
+      h2("their first victory against the", align = "center"),
+      h1("evil Galactic Empire.")
+    )
+  )
+)
+```
+
+Formato del Texto
+
+Shiny ofrece muchas funciones de etiqueta para formatear texto. La forma más fácil de describirlos es mediante un ejemplo.
+
+Pegue el objeto ui a continuación en su archivo .R de la aplicación y guárdelo. Si su aplicación Shiny aún se está ejecutando, puede actualizar su página web o ventana de vista previa, y se mostrarán los cambios. Si su aplicación está cerrada, simplemente vuelva a iniciarla.
+
+Compare la aplicación que se muestra con su definición de objeto de la interfaz de usuario actualizada para descubrir cómo formatear el texto en una aplicación brillante.
+
+
+```{r}
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      p("p creates a paragraph of text."),
+      p("A new p() command starts a new paragraph. Supply a style attribute to change the format of the entire paragraph.", style = "font-family: 'times'; font-si16pt"),
+      strong("strong() makes bold text."),
+      em("em() creates italicized (i.e, emphasized) text."),
+      br(),
+      code("code displays your text similar to computer code"),
+      div("div creates segments of text with a similar style. This division of text is all blue because I passed the argument 'style = color:blue' to div", style = "color:blue"),
+      br(),
+      p("span does the same thing as div, but it works with",
+        span("groups of words", style = "color:blue"),
+        "that appear inside a paragraph.")
+    )
+  )
+)
+```
+
+Imágenes
+Las imágenes pueden mejorar la apariencia de su aplicación y ayudar a los usuarios a comprender el contenido. Shiny busca la función img para colocar archivos de imagen en tu aplicación.
+
+Para insertar una imagen, otorgue a la función img el nombre de su archivo de imagen como el argumento src (por ejemplo, img (src = "my_image.png")). Debe deletrear este argumento ya que img pasa su entrada a una etiqueta HTML y src es lo que espera la etiqueta.
+
+También puede incluir otros parámetros compatibles con HTML, como altura y ancho. Tenga en cuenta que los números de alto y ancho se referirán a los píxeles.
+
+```{r}
+img(src = "my_image.png", height = 72, width = 72)
+```
+La función img busca su archivo de imagen en un lugar específico. Su archivo debe estar en una carpeta llamada www en el mismo directorio que el script app.R. Shiny trata este directorio de una manera especial. Shiny compartirá cualquier archivo que se coloque aquí con el navegador web de su usuario, lo que hace de www un excelente lugar para colocar imágenes, hojas de estilo y otras cosas que el navegador necesitará para construir los componentes wep de su aplicación Shiny.
+
+
+
+
+Otras etiquetas
+Esta lección cubre las funciones de etiquetas Shiny más populares, pero hay muchas más funciones de etiquetas para que pueda usar. Puede aprender sobre funciones adicionales de etiquetas en Personalizar su UI con HTML y el Glosario de Etiquetas HTML Brillantes.
+
+Tu turno
+Puede utilizar las funciones de diseño, HTML e img de Shiny para crear interfaces de usuario muy atractivas y útiles. Vea qué tan bien entiende estas funciones al recrear la aplicación Shiny que se muestra abajo. Use los ejemplos en este tutorial para trabajar en él y luego probarlo.
+
+Nuestro script de aplicación.R se encuentra debajo del botón Modelo de respuesta, pero no solo copie y pegue. Asegúrese de comprender cómo funciona el código antes de continuar.
+
+                      Lección 3 
+               Agregar widgets de control 
+               
+ ¿Qué es un widget? Un elemento web con el que sus usuarios pueden interactuar. Los widgets proporcionan a los usuarios una forma de enviar mensajes a la aplicación Shiny.              
+                 
+Shiny viene con una familia de widgets preconstruidos, cada uno creado con una función R transparente. 
+
+Los widgets Shiny estándar son:
+
+Función	            Widget
+actionButton	      Botón de acción
+checkboxGroupInput	Un grupo de casillas de verificación
+checkboxInput	      Una sola casilla de verificación
+dateInput	          Un calendario para ayudar a seleccionar la fecha
+dateRangeInput	    Un par de calendarios para seleccionar un rango de fechas
+fileInput	          Un asistente de control de carga de archivos
+helpText	          Texto de ayuda que se puede agregar a un formulario de entrada
+numericInput	      Un campo para ingresar números
+radioButtons	      Un conjunto de botones de radio
+selectInput	        Una caja con opciones para elegir
+sliderInput	        Una barra deslizadora
+submitButton	      Un botón de enviar
+textInput	          Un campo para ingresar texto
+
+#Agregar widgets
+Para agregar un widget a su aplicación, coloque una función de widget dentro sidebarPanel o mainPanel en su ui objeto.
+
+Cada función de widget requiere varios argumentos. Los primeros dos argumentos para cada widget son:
+
+1. Nombre para el widget : el usuario no verá este nombre, pero puede usarlo para acceder al valor del widget. El nombre debe ser una cadena de caracteres.
+
+2. Etiqueta : esta etiqueta aparecerá con el widget en su aplicación. Debe ser una cadena de caracteres, pero puede ser una cadena vacía "".
+
+En este ejemplo, el nombre es "acción" y la etiqueta es "Acción": actionButton("action", label = "Action")
+
+Los argumentos restantes varían de widget a widget, según lo que necesite el widget para hacer su trabajo. Incluyen cosas como valores iniciales, rangos e incrementos. Puede encontrar los argumentos exactos que necesita un widget en la página de ayuda de la función del widget (por ejemplo, ?selectInput).
+
+El app.Rscript a continuación hace que la aplicación se represente arriba. Cambie su propia App-1/app.R secuencia de comandos para que coincida y luego inicie la aplicación ( runApp("App-1"), seleccione Ejecutar aplicación o use accesos directos).
+
+```{r}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  titlePanel("Basic widgets"),
+  
+  fluidRow(
+    
+    column(3,
+           h3("Buttons"),
+           actionButton("action", "Action"),
+           br(),
+           br(), 
+           submitButton("Submit")),
+    
+    column(3,
+           h3("Single checkbox"),
+           checkboxInput("checkbox", "Choice A", value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput("checkGroup", 
+                              h3("Checkbox group"), 
+                              choices = list("Choice 1" = 1, 
+                                             "Choice 2" = 2, 
+                                             "Choice 3" = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput("date", 
+                     h3("Date input"), 
+                     value = "2014-01-01"))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           dateRangeInput("dates", h3("Date range"))),
+    
+    column(3,
+           fileInput("file", h3("File input"))),
+    
+    column(3, 
+           h3("Help text"),
+           helpText("Note: help text isn't a true widget,", 
+                    "but it provides an easy way to add text to",
+                    "accompany other widgets.")),
+    
+    column(3, 
+           numericInput("num", 
+                        h3("Numeric input"), 
+                        value = 1))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           radioButtons("radio", h3("Radio buttons"),
+                        choices = list("Choice 1" = 1, "Choice 2" = 2,
+                                       "Choice 3" = 3),selected = 1)),
+    
+    column(3,
+           selectInput("select", h3("Select box"), 
+                       choices = list("Choice 1" = 1, "Choice 2" = 2,
+                                      "Choice 3" = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput("slider1", h3("Sliders"),
+                       min = 0, max = 100, value = 50),
+           sliderInput("slider2", "",
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput("text", h3("Text input"), 
+                     value = "Enter text..."))   
+  )
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+        Lección 4
+
+	¡Es hora de darle a su aplicación Shiny una calidad "real"! Esta lección le enseñará a construir salidas reactivas para pantallas en su aplicación Shiny. La salida reactiva responde automáticamente cuando su usuario alterna un widget.
+
+Al final de esta lección, sabrá cómo hacer una aplicación Shiny simple con dos líneas de texto reactivas. Cada línea mostrará los valores de un widget en función de la entrada de su usuario.
+
+
+Esta nueva aplicación Shiny necesitará su propio directorio nuevo. Cree una carpeta en su directorio de trabajo llamado census-app. Aquí es donde se guarda el archivo de la app.R que se haga en esta lección.
+
+
+Dos pasos 
+Puede crear salidas reactivas con un proceso de dos pasos. 
+
+Agregue un objeto R a su interfaz de usuario. Digale Shiny cómo construir el objeto en la función de servidor. El objeto será reactivo si el código que lo genera se llama widget value.
+
+
+Paso 1: agregar un objeto R a la UI, Shiny proporciona una familia de funciones que convierten objetos R en salidas para su interfaz de usuario. Cada función crea un tipo específico de salida
+
+Output function	Creates
+dataTableOutput	DataTable
+htmlOutput	raw HTML
+imageOutput	image
+plotOutput	plot
+tableOutput	table
+textOutput	text
+uiOutput	raw HTML
+verbatimTextOutput	text
+
+Puede agregar resultados a la interfaz de usuario de la misma forma que agregó elementos HTML y widgets. Coloque la función de salida dentro de sidebarPanel o mainPanel en la interfaz de usuario.
+
+Por ejemplo, el siguiente objeto ui usa textOutput para agregar una línea reactiva de texto al panel principal de la aplicación Shiny que se muestra arriba.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("censusVis"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      helpText("Create demographic maps with 
+               information from the 2010 US Census."),
+      
+      selectInput("var", 
+                  label = "Choose a variable to display",
+                  choices = c("Percent White", 
+                              "Percent Black",
+                              "Percent Hispanic", 
+                              "Percent Asian"),
+                  selected = "Percent White"),
+      
+      sliderInput("range", 
+                  label = "Range of interest:",
+                  min = 0, max = 100, value = c(0, 100))
+    ),
+    
+    mainPanel(
+      textOutput("selected_var")
+    )
+  )
+)
+```
+
+
+Observe que textOutput toma un argumento, la cadena de caracteres "selected_var". Cada una de las * funciones de salida requiere un único argumento: una cadena de caracteres que Shiny usará como el nombre de su elemento reactivo. Sus usuarios no verán este nombre, pero lo usarán más adelante.
+
+
+Paso 2: 
+Proporcione el código a R para construir el objeto.
+Colocando una función en ui le dice a Shiny dónde mostrar su objeto. Luego, debes decirle a Shiny cómo construir el objeto.
+Hacemos esto proporcionando el código a R que crea el objeto en la función de servidor.
+La función de servidor juega un papel especial en el proceso Shiny; Construye un objeto similar a una lista llamado salida que contiene todo el código necesario para actualizar los objetos R en su aplicación. Cada objeto R necesita tener su propia entrada en la lista.
+
+Puede crear una entrada definiendo un nuevo elemento para la salida dentro de la función del servidor, como a continuación. El nombre del elemento debe coincidir con el nombre del elemento reactivo que ha creado en la ui.
+
+En la función de servidor a continuación, output$selected_var matches textOutput("selected_var") en su ui.
+
+```{r}
+server <- function(input, output) {
+  
+  output$selected_var <- renderText({ 
+    "You have selected this"
+  })
+  
+}
+```
+
+No necesita indicar explícitamente en la función del servidor para devuelva la salida en su última línea de código. R actualizará automáticamente la salida a través de la semántica de la clase de referencia
+
+Cada entrada al resultado debe contener la salida de una de las funciones render * de Shiny. Estas funciones capturan una expresión de R y hacen un preprocesamiento ligero en la expresión. Use la función render * que corresponde al tipo de objeto reactivo que está haciendo.
+
+render function	creates
+renderDataTable	DataTable
+renderImage	images (saved as a link to a source file)
+renderPlot	plots
+renderPrint	any printed output
+renderTable	data frame, matrix, other table like structures
+renderText	character strings
+renderUI	a Shiny tag object or HTML
+
+Cada función render * toma un único argumento: una expresión de R rodeada de llaves, {}. La expresión puede ser una línea de texto simple, o puede involucrar muchas líneas de código, como si fuera una llamada de función complicada.
+
+Piense en esta expresión de R como un conjunto de instrucciones que le da a Shiny para que guarde para más tarde. Shiny ejecutará las instrucciones la primera vez que inicie su aplicación, y luego Shiny volverá a ejecutar las instrucciones cada vez que necesite actualizar su objeto.
+
+Para que esto funcione, su expresión debe devolver el objeto que tiene en mente (texto, un plot, un data framw, etc.). Obtendrá un error si la expresión no devuelve un objeto o si devuelve un tipo de objeto incorrecto.
+
+
+Usar widget values
+Si ejecuta la aplicación con la función de servidor anterior, se mostrará "Ha seleccionado esto" en el panel principal. Sin embargo, el texto no será reactivo. No cambiará aunque manipules los widgets de su aplicación.
+
+Puede hacer que el texto sea reactivo pidiéndole a Shiny que llame un widget value cuando construya el texto. Veamos cómo hacer esto.
+Puede ver a la primera línea de código en la función del servidor. ¿Notan que la función del servidor menciona dos argumentos, entrada y salida? Ya vio que la salida es un objeto similar a una lista que almacena instrucciones para construir los objetos R en su aplicación.
+
+La entrada es un segundo objeto similar a una lista. Almacena los valores actuales de todos los widgets en su aplicación. Estos valores se guardarán con los nombres que asignó a los widgets en su ui 
+
+por ejemplo, nuestra aplicación tiene dos widgets, uno llamado "var" y uno llamado "range" (le dio a los widgets estos nombres en la Lección 3). Los valores de "var" y "range" se guardarán en la entrada como entrada $ var e ingrese $ range. Como el control deslizante tiene dos valores (un mínimo y un máximo), la entrada $ range contendrá un vector de longitud dos.
+
+Shiny hará automáticamente que un objeto sea reactivo si el objeto usa un valor de entrada.
+Por ejemplo, la función de servidor siguiente crea una línea de texto reactiva llamando al cuadro widget value de selección para crear el texto.
+
+```{r}
+server <- function(input, output) {
+  
+  output$selected_var <- renderText({ 
+    paste("You have selected", input$var)
+  })
+  
+}
+```
+
+Shiny busca cuales salidas dependen de qué widgets. Cuando un usuario cambia un widget, Shiny reconstruirá todas las salidas que dependen del widget, utilizando el nuevo valor del widget a medida que avanza. Como resultado, los objetos reconstruidos estarán completamente actualizados.
+
+Así es como creas la reactividad con Shiny, conectando los valores de entrada a los objetos en la salida. Shiny se ocupa de todos los demás detalles.
+
+Inicie su aplicación y vea la salida reactiva
+Cuando esté listo, actualice sus funciones de servidor y ui para que coincidan con las anteriores. Luego ejecute su aplicación Shiny ejecutando runApp ("census-app", display.mode = "showcase") en la línea de comando. Su aplicación debería verse como la aplicación a continuación, y su estado de cuenta debería actualizarse instantáneamente al cambiar el widget de cuadro de selección.
+
+Mire la porción del servidor del script. Cuando Shiny reconstruye una salida, resalta el código que está ejecutando. Este resaltado temporal puede ayudarlo a ver cómo Shiny genera salida reactiva.
+
+Su turno
+Agregue una segunda línea de texto reactivo al panel principal de su aplicación Shiny. Esta línea debería mostrar "Has elegido un rango que va de algo a algo", y cada cosa debería mostrar el valor mínimo (mínimo) o máximo (máximo) actual del control deslizante.
+
+No olvide actualizar su objeto ui y su función de servidor.
+
+Resumen
+
+En esta lección, creó su primera aplicación Shiny reactiva. En el camino, aprendió a
+usar una función * Output en la interfaz de usuario para colocar objetos reactivos en su aplicación Shiny,
+use una función render * en el servidor para decirle a Shiny cómo construir sus objetos,
+rodee las expresiones R con llaves, {}, en cada función render *,
+guarda tus expresiones render * en la lista de salida, con una entrada para cada objeto reactivo en tu aplicación, y
+crear reactividad incluyendo un valor de entrada en una expresión render *.
+Si sigues estas reglas, Shiny automáticamente hará que tus objetos sean reactivos.
