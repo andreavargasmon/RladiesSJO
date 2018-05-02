@@ -35,7 +35,7 @@ Seguinos:
 
 **Quinta reunión (Martes 10 de abril 2018)**
 
-- [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Shiny2_RladiesSJO.Rmd)
+- [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Shiny2_RladiesSJO.R)
 
 **Sexta reunión (Martes 15 de mayo 2018)**
 
