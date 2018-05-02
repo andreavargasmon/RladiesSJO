@@ -33,10 +33,19 @@ Seguinos:
 - [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Shiny_RladiesSJO.Rmd)
 - [Hoja Resumen](http://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
+**Quinta reunión (Martes 10 de abril 2018)**
+
+- [Código de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/Shiny2_RladiesSJO.Rmd)
+
+**Sexta reunión (Martes 15 de mayo 2018)**
+
+- [Data Wrangling (propuesta en inglés)]()
+- [Código de hoy]()
+- [Hoja Resumen](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
 **Próximas reuniones (2018)**
 
-- Martes 10 de abril
-- Martes 8 de mayo
 - Martes 5 de junio
 - Martes 10 de julio
 - Martes 7 de agosto
