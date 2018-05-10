@@ -39,9 +39,12 @@ Seguinos:
 
 **Sexta reunión (Martes 15 de mayo 2018)**
 
-- [Data Wrangling (propuesta en inglés)]()
-- [Código de hoy]()
-- [Hoja Resumen](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- [Presentación]()
+- [Práctica de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/dplyr%20pra%CC%81ctica.Rmd)
+- [Conjunto de datos tortugas](https://github.com/malfaro2/RladiesSJO/blob/master/tortugas2.csv)
+- [Hoja Resumen Data Import](https://github.com/malfaro2/RladiesSJO/blob/master/data-import.pdf)
+- [Hoja Resumen Data Transformation](https://github.com/malfaro2/RladiesSJO/blob/master/data-transformation.pdf)
+- [Hoja Resumen Grammar](https://github.com/malfaro2/RladiesSJO/blob/master/grammar.jpeg)
 
 
 **Próximas reuniones (2018)**
