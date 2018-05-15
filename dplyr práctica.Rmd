@@ -1,12 +1,22 @@
 ---
 title: "dplyr1"
-author: "Alfaro Andrea"
+author: "R Ladies"
 date: "9 de mayo de 2018"
 output: html_document
 ---
 El paquete dplyr proporciona herramientas sencillas para las tareas de manipulación de datos más comunes. Está diseñado para trabajar directamente con marcos de datos, con muchas tareas comunes optimizadas al estar escritas en un lenguaje compilado (C ++). Una característica adicional es la capacidad de trabajar directamente con datos almacenados en una base de datos externa. Los beneficios de hacer esto son que los datos se pueden gestionar de forma nativa en una base de datos relacional, las consultas se pueden realizar en esa base de datos y solo se devuelven los resultados de la consulta.
 
 Esto resuelve un problema común con R en que todas las operaciones se llevan a cabo en la memoria y, por lo tanto, la cantidad de datos con la que puede trabajar está limitada por la memoria disponible. Las conexiones de la base de datos esencialmente eliminan esa limitación, ya que puede conectarse a una base de datos de muchos cientos de GB, realizar consultas directamente sobre ella y volver a incluir en R solo lo que necesita para el análisis.
+
+
+Funciones que vamos a aprender:
+
+select(): Para seleccionar un subconjunto de la base.
+filter(): Para filtrar según ciertas características.
+mutate(): Crear nuevas columnas utilizando la información de otras. 
+group_by() and summarize(): Crear estadísticas de resumen en datos agrupados.
+arrange(): Ordenar Resultados 
+count(): Contar valores.
 
 
 1.Instale los siguentes paquetes:
@@ -23,34 +33,41 @@ b.readr
 a.str(tortugas)
 b.View(tortugas)
 
+Función 1: select()
 5.Seleccione la columna de especie manteniendo constantes las otras columnas, con el comando:     **select(base,especie,cond,proteina)**
 
+Función 2: filter()
 6.Filtre los datos por especie con el siguente comando: **filter(base,group == "")**
 
-7.Seleccione y filtre al mismo tiempo por especie, de la siguente forma:
+7.Filtre y seleccione al mismo tiempo por especie, de la siguente forma:
 
 b.Compare el resultado anterior con esta otra forma de hacerlo:
 
 c. (tip:Ctrl+shift+M, permite filtrar de forma rápida)
 MAC: Cmd + Shift + M
 
-
-8.Seleccione las tortugas de la especie kYNOSTERNON y las tortugas con la condición 1.
+8.¿Cómo seleccionarían las tortugas de la especie kYNOSTERNON, con la condición 1, según el ejercicio anterior?
 
 9.Seleccione aletoriamente n filas con el comando: **sample_n(base, n, replace = TRUE)**
 
-10.Seleecione una fila en específico con el comando: **slice(base, seq())**
+10.Selecione una fila en específico con el comando: **slice(base,10)**
 
+Función 3: mutate()
 11.Cree nuevas columnas en base a los valores existentes, con el comando: **mutate()**
 
 12.Repita el paso anterior creando una nueva columna apartir de la anterior.
 
+Función 4: group_by() and summarize()
 13.Sume el total de elementos de la columna condición, pero sumelo por cada tipo de condición con el comando: **summarize( vector = table())**
 
-+Repita el paso anterior para especie, pero esta vez sume la media de proteina: **summarize(vector = mean())**
++Repita el paso anterior para especie, pero esta vez obtenga la media de proteina por especie: **summarize(vector = mean())**
 
-14.Ordena la lista de tortugas de la especie Chelonia ordenalos de mayor nivel de proteina al menor nivel de proteina, con el comando: **arrange(desc())**
+Función 4: arrange ()
+14.Ordena la lista de tortugas de la especie Chelonia, después ordenalos de mayor nivel de proteina al menor nivel de proteina, con el comando: **arrange()**
 
+14.1 ¿Cómo obtendrían los niveles de proteína ordenados de mayor a menor en la especie chelonia?
+
+Función 5: count()
 15. Indique el número de elementos por especie, con el comando **count()**
 
 16.Exporte la base de datos, con los comandos: **filter(!is.na())**, **mutate(groups = )**
