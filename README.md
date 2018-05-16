@@ -40,6 +40,7 @@ Seguinos:
 **Sexta reunión (Martes 15 de mayo 2018)**
 
 - [Práctica de hoy](https://github.com/malfaro2/RladiesSJO/blob/master/dplyr%20pra%CC%81ctica.Rmd)
+- [Soluciones](https://github.com/malfaro2/RladiesSJO/blob/master/Solucio%CC%81n_sesio%CC%81n_dplyr1.Rmd)
 - [Conjunto de datos tortugas](https://github.com/malfaro2/RladiesSJO/blob/master/tortugas2.csv)
 - [Hoja Resumen Data Import](https://github.com/malfaro2/RladiesSJO/blob/master/data-import.pdf)
 - [Hoja Resumen Data Transformation](https://github.com/malfaro2/RladiesSJO/blob/master/data-transformation.pdf)
