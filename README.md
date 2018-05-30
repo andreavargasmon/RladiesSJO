@@ -46,6 +46,12 @@ Seguinos:
 - [Hoja Resumen Data Transformation](https://github.com/malfaro2/RladiesSJO/blob/master/data-transformation.pdf)
 - [Hoja Resumen Grammar](https://github.com/malfaro2/RladiesSJO/blob/master/grammar.jpeg)
 
+**Sétima reunión (Miércoles 6 de junio 2018)**
+
+- Esta reunión será un MIÉRCOLES y no un martes.
+- La haremos en la biblioteca Tinoco, en las salitas de afuera (donde fue la primera reunión)
+- Veremos el webinar en español de RStudio: https://www.rstudio.com/resources/videos/usando-r-para-la-ciencia-de-datos/
+- Discutiremos juntas las preguntas que podamos tener acerca del webinar.
 
 **Próximas reuniones (2018)**
 
