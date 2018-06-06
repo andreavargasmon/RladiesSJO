@@ -52,6 +52,7 @@ Seguinos:
 - La haremos en la biblioteca Tinoco, en las salitas de afuera (donde fue la primera reunión)
 - Veremos el webinar en español de RStudio: https://www.rstudio.com/resources/videos/usando-r-para-la-ciencia-de-datos/
 - Discutiremos juntas las preguntas que podamos tener acerca del webinar.
+- Recursos: https://github.com/edgararuiz/webinars/tree/master/55-ciencia-de-datos-R
 
 **Próximas reuniones (2018)**
 
