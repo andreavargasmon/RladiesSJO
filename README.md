@@ -54,10 +54,12 @@ Seguinos:
 - Discutiremos juntas las preguntas que podamos tener acerca del webinar.
 - Recursos: https://github.com/edgararuiz/webinars/tree/master/55-ciencia-de-datos-R
 
+**Octava reunión (Martes 10 de julio 2018)**
+
+- Por anunciar - 
+
 **Próximas reuniones (2018)**
 
-- Martes 5 de junio
-- Martes 10 de julio
 - Martes 7 de agosto
 - Martes 4 de setiembre
 - Martes 9 de octubre
