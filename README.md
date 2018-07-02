@@ -54,9 +54,11 @@ Seguinos:
 - Discutiremos juntas las preguntas que podamos tener acerca del webinar.
 - Recursos: https://github.com/edgararuiz/webinars/tree/master/55-ciencia-de-datos-R
 
-**Octava reunión (Martes 10 de julio 2018)**
+**Octava reunión (Martes 17 de julio 2018)**
 
-- Por anunciar - 
+- La haremos en la biblioteca Tinoco, en las salitas de afuera (donde fue la primera reunión)
+- Administración de Datos con R: http://tutorials.iq.harvard.edu/R/RDataManagement/RDataManagement.html
+- Discutiremos juntas las preguntas los retos que enfrentamos ANTES de análizar los datos, es decir, cuando tenemos que invertir una buena parte de nuestro tiempo leyendo, corrijiendo y formateando los datos con los que trabajaremos.
 
 **Próximas reuniones (2018)**
 
