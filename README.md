@@ -58,7 +58,7 @@ Seguinos:
 
 - La haremos en la biblioteca Tinoco, en las salitas de afuera (donde fue la primera reunión)
 - Administración de Datos con R: http://tutorials.iq.harvard.edu/R/RDataManagement/RDataManagement.html
-- Discutiremos juntas los retos que enfrentamos ANTES de analizar los datos, es decir, cuando tenemos que invertir una buena parte de nuestro tiempo leyendo, corrijiendo y formateando los datos con los que trabajaremos.
+- Discutiremos juntas los retos que enfrentamos ANTES de analizar los datos, es decir, cuando tenemos que invertir una buena parte de nuestro tiempo leyendo, corrigiendo y formateando los datos con los que trabajaremos.
 
 **Próximas reuniones (2018)**
 
