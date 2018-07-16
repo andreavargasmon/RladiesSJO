@@ -56,7 +56,7 @@ Seguinos:
 
 **Octava reunión (Martes 17 de julio 2018)**
 
-- La haremos en la biblioteca Tinoco, en las salitas de afuera (donde fue la primera reunión)
+- La haremos en en el aula 220 de la Facultad de Ciencias Económicas, en la UCR.
 - Administración de Datos con R: http://tutorials.iq.harvard.edu/R/RDataManagement/RDataManagement.html
 - [Taller en español](https://github.com/malfaro2/RladiesSJO/blob/master/RadmDatos.Rmd)
 - Discutiremos juntas los retos que enfrentamos ANTES de analizar los datos, es decir, cuando tenemos que invertir una buena parte de nuestro tiempo leyendo, corrigiendo y formateando los datos con los que trabajaremos.
