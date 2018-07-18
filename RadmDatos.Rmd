@@ -3,6 +3,8 @@ title: "R para administración de Datos"
 author: "Marcela Alfaro"
 date: "13 de julio de 2018"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # R para administración de Datos
@@ -24,7 +26,7 @@ Este es un curso R intermedio / avanzado apropiado para aquellas con conocimient
 
 Es común que los datos estén disponibles en un sitio web en alguna parte, ya sea por una agencia gubernamental, un grupo de investigación u otras organizaciones y entidades. A menudo, los datos que desea están distribuidos en muchos archivos, y recuperarlos de a uno por vez es tedioso y lento. Tal es el caso con los datos de nombres de bebés que usaremos hoy.
 
-La Oficina de Estadísticas Nacionales del Reino Unido proporciona datos anuales sobre los nombres de bebés ás populares desde 1996. Los datos se proporcionan por separado para niños y niñas y se almacenan en hojas de cálculo de Excel.
+La Oficina de Estad??sticas Nacionales del Reino Unido proporciona datos anuales sobre los nombres de bebés ás populares desde 1996. Los datos se proporcionan por separado para niños y niñas y se almacenan en hojas de cálculo de Excel.
 
 He descargado todos los archivos de Excel que contienen datos de nombres de niños de https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalesbabynamesstatisticsboys. Nuestra misión es extraer y graficar los nombres de los 100 mejores niños en Inglaterra y Gales por cada año desde 1996. Hay varias cosas que lo hacen difícil.
 
@@ -59,14 +61,13 @@ Nuestra primera tarea es iterar sobre todos los archivos de datos y leer la hoja
 El primer paso es obtener un vector de nombres de archivos.
 
 ```{r}
-
-
+boy.file.names <- list.files("babyNamesData/boys", full.names = TRUE)
 ```
 
 Ahora podemos iterar sobre los nombres de los archivos y obtener los nombres de cada hoja de trabajo. Podríamos usar un ciclo for, o sapply, pero la familia de funciones del mapa del paquete purrr nos da una alternativa más consistente, así que usaremos eso.
 
 ```{r}
-
+map(boy.file.names, excel_sheets)
 ```
 
 
@@ -83,7 +84,10 @@ Si no está familiarizada con las expresiones regulares, http://www.regexr.com/ 
 Ahora que sabemos cómo filtrar vectores de caracteres usando str_subset, podemos identificar las hojas correctas para cada año.
 
 ```{r}
-
+findTable1 <- function(x) {
+  str_subset(excel_sheets(x), "Table 1")
+}
+map(boy.file.names, findTable1)
 ```
 
 ## Lectura de todos los archivos
@@ -93,7 +97,11 @@ A continuación, queremos leer la hoja de trabajo correcta de cada archivo. Ya s
 Recuerde que los datos reales comienzan en la fila 7, por lo que queremos omitir las primeras 6 filas.
 
 ```{r}
-
+readTable1 <- function(file) {
+  read_excel(file, sheet = findTable1(file), skip = 6)
+}
+boysNames <- map(boy.file.names, readTable1)
+glimpse(boysNames[[1]])
 ```
 
 ## Limpieza de datos
@@ -124,13 +132,16 @@ Los nombres de las columnas están en mal estado. En R, necesitamos nombres de c
 Los nombres reales de las columnas se ven así:
 
 ```{r}
-
+names(boysNames[[1]])
 ```
 
 Entonces debemos a) asegurarnos de que cada columna tenga un nombre, y b) distinguir entre la primera y la segunda ocurrencia de "Nombre" y "Recuento". Podríamos hacer esto paso a paso, pero hay una función práctica en R llamada make.names que lo hará por nosotros.
 
 ```{r}
-
+names(boysNames[[1]])
+make.names(names(boysNames[[1]]), unique = TRUE)
+setNames(boysNames[[1]], make.names(names(boysNames[[1]]), unique = TRUE))
+names(boysNames[[1]])
 ```
 
 ## Reparar todos los nombres
@@ -138,7 +149,10 @@ Entonces debemos a) asegurarnos de que cada columna tenga un nombre, y b) distin
 Por supuesto, necesitamos iterar sobre cada data.frame en la lista boysNames y esto para cada uno. Afortunadamente, la función de mapa lo hace fácil.
 
 ```{r}
-
+boysNames <- map(boysNames,
+                 function(x) {
+                     setNames(x, make.names(names(x), unique = TRUE))
+                 })
 ```
 
 
@@ -147,7 +161,9 @@ Por supuesto, necesitamos iterar sobre cada data.frame en la lista boysNames y e
 A continuación, queremos eliminar las filas en blanco y las filas utilizadas para las notas. Una manera fácil de hacerlo es eliminar filas que no tienen un nombre. Podemos filtrar algunas condiciones usando la función de filtro, como esta:
 
 ```{r}
-
+boysNames[[1]]
+boysNames[[1]] <- filter(boysNames[[1]], !is.na(Name))
+boysNames[[1]]
 ```
 
 Por supuesto, tenemos que hacer eso para cada conjunto de datos en la lista boysNames, pero se lo dejo a usted.
@@ -157,7 +173,9 @@ Por supuesto, tenemos que hacer eso para cada conjunto de datos en la lista boys
 A continuación, queremos conservar únicamente las columnas Name, Name__1 y Count, Count__1. Podemos hacer eso usando la función de selección:
 
 ```{r}
-
+boysNames[[1]]
+boysNames[[1]] <- select(boysNames[[1]], Name, Name__1, Count, Count__1)
+boysNames[[1]]
 ```
 
 
@@ -168,7 +186,9 @@ De nuevo, querremos hacer esto para todos los elementos en boysNames, una tarea 
 Nuestra última tarea es reorganizar los datos para que todo esté en una sola tabla en lugar de en dos tablas lado a lado. Para muchas tareas similares, la función de recopilación en el paquete tidyr es útil, pero en este caso será mejor utilizar una combinación de select y bind_rows.
 
 ```{r}
-
+boysNames[[1]]
+bind_rows(select(boysNames[[1]], Name, Count),
+          select(boysNames[[1]], Name = Name__1, Count = Count__1))
 ```
 
 
@@ -183,7 +203,18 @@ Ejercicio prototipo
 Hay diferentes formas de hacerlo. Aqui hay uno:
 
 ```{r}
+## write a function that does all the cleanup
+cleanupNamesData <- function(x) {
+    filtered <- filter(x, !is.na(Name)) # drop rows with no Name value
+    selected <- select(filtered, Name, Count, Name__1, Count__1) # select just Name and Count columns
+    bind_rows(select(selected, Name,  Count), # re-arrange into two columns
+              select(selected, Name = Name__1, Count = Count__1))
+}
 
+## test it out on the second data.frame in the list
+glimpse(boysNames[[2]]) # before cleanup
+glimpse(cleanupNamesData(boysNames[[2]])) # after cleanup
+boysNames <- map(boysNames, cleanupNamesData)
 ```
 
 ## Agregar columnas derivadas
@@ -191,7 +222,7 @@ Hay diferentes formas de hacerlo. Aqui hay uno:
 A menudo es útil agregar columnas derivadas de una o más columnas existentes. Por ejemplo, podemos desear agregar una columna para almacenar la longitud de cada nombre:
 
 ```{r}
-
+boysNames <- map(boysNames, mutate, Length = str_count(Name))
 ```
 
 ### Ejercicio: agregar una columna anual
@@ -203,7 +234,11 @@ Ejercicio prototipo
 Hay diferentes formas de hacerlo. Aqui hay uno:
 
 ```{r}
+## Extract years
+years <- as.integer(str_extract(boy.file.names, "[0-9]{4}"))
 
+## Insert year column in each table
+boysNames <- map2(boysNames, years, function(x, y) mutate(x, Year = y))
 ```
 
 ## Organización y almacenamiento de datos
@@ -219,7 +254,19 @@ Ahora mismo tenemos una lista de tablas, una para cada año. Esta no es una mala
 Podemos almacenar los datos organizados por año en archivos .csv, archivos .rds o en tablas de bases de datos. Por ahora, almacenaremos estos datos en archivos .csv y luego veremos que fácil es trabajar con ellos.
 
 ```{r}
+## make directory to store the data
+dir.create("./data/byyear", recursive = TRUE)
+## Warning in dir.create("./data/byyear", recursive = TRUE): './data/byyear'
+## already exists
+## extract the years
+years <- map_int(boysNames, function(x) unique(x$Year))
+## construct paths
+paths <- str_c("data/byyear/boys_names_", years, ".csv", sep = "")
+## write out the data
+walk2(boysNames, paths, write_csv)
 
+## clear our workspace
+rm(list = ls())
 ```
 
 
@@ -231,7 +278,18 @@ Ejercicio prototipo
 El número uno es fácil, el número dos es más difícil:
 
 ```{r}
+## 1. What where the five most popular names in 2013?
+boys2013 <- read_csv("./data/byyear/boys_names_2013.csv")
+slice(arrange(boys2013, desc(Count)), 1:5)
+## 2. How has the popularity of the name "ANDREW" changed over time?
+boysNames <- map(list.files("./data/byyear", full.names = TRUE),
+                 read_csv)
+andrew <- map(boysNames, filter, Name == "ANDREW")
+andrew <- bind_rows(andrew)
 
+ggplot(andrew, aes(x = Year, y = Count)) +
+    geom_line() +
+    ggtitle("Popularity of \"Andrew\", over time")
 ```
 
 
@@ -252,7 +310,22 @@ Ejercicio prototipo
 Trabajar con los datos en una gran tabla es a menudo más fácil.
 
 ```{r}
+boysNames <- bind_rows(boysNames)
 
+dir.create("data/all")
+## Warning in dir.create("data/all"): 'data/all' already exists
+write_csv(boysNames, "data/all/boys_names.csv")
+
+## What where the five most popular names in 2013?
+slice(arrange(filter(boysNames, Year == 2013),
+              desc(Count)),
+      1:5)
+## How has the popularity of the name "ANDREW" changed over time?
+andrew <- filter(boysNames, Name == "ANDREW")
+
+ggplot(andrew, aes(x = Year, y = Count)) +
+    geom_line() +
+    ggtitle("Popularity of \"Andrew\", over time")
 ```
 
 Lectura y recursos adicionales
@@ -272,5 +345,6 @@ http: //www.jstatso | .org / v31 / i01 / paper
 
 Instituto de Ciencias Sociales Cuantitativas: http://iq.harvard.edu
 IQSS Data Science Services: http://dss.iq.harvard.edu/
+
 
 Este taller fue tomado y traducido de: http://tutorials.iq.harvard.edu/R/RDataManagement/RDataManagement.html
