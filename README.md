@@ -81,6 +81,6 @@ Seguinos:
 - Martes 6 de noviembre
 - Martes 4 de diciembre
 
-Lugar: Sala de Audiovisuales, Biblioteca Tinoco, Universidad de Costa Rica.
+Lugar: Sala de Orientación Bibliográfica, III nivel de la Biblioteca Tinoco, Universidad de Costa Rica.
 
 
