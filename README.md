@@ -68,17 +68,18 @@ Seguinos:
 - Esta sesión estará abierta para cualquier persona que quiera trabajar en sus propuestas para presentar en ConectaR 2019. 
 
 
+**Décima reunión (Martes 4 de setiembre 2018)**
+
+- Exploremos el paquete dplyr con el conjunto de datos del BID.
+- La idea es que Uds bajen los datos, y encuentren la mejor manera de describirlos y resumirlos usando tidyverse. 
+
+
 **Próximas reuniones (2018)**
 
-- Martes 7 de agosto
-- Martes 4 de setiembre
 - Martes 9 de octubre
 - Martes 6 de noviembre
 - Martes 4 de diciembre
 
-Lugar: IBM Innovation Hub
+Lugar: Sala de Audiovisuales, Biblioteca Tinoco, Universidad de Costa Rica.
 
-Dirección: Los Yoses San José, de la tienda Arenas 300mts Sur y 250mts Oeste.
-
-Waze: [Impact Hub](https://www.waze.com/livemap?zoom=17&lat=9.92825&lon=-84.06164)
 
