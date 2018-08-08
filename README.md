@@ -70,8 +70,9 @@ Seguinos:
 
 **Décima reunión (Martes 4 de setiembre 2018)**
 
-- Exploremos el paquete dplyr con el conjunto de datos del BID.
+- [Exploremos el paquete dplyr con el conjunto de datos del BID](https://github.com/malfaro2/RladiesSJO/blob/master/IDB_data).
 - La idea es que Uds bajen los datos, y encuentren la mejor manera de describirlos y resumirlos usando tidyverse. 
+- Datos de [test](https://github.com/malfaro2/RladiesSJO/blob/master/test.csv) y de [train](https://github.com/malfaro2/RladiesSJO/blob/master/train.csv)
 
 
 **Próximas reuniones (2018)**
