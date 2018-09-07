@@ -1,0 +1,90 @@
+---
+title: "R Ladies"
+author: "Fabiola"
+date: "30 de agosto de 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+1. Leer y examinar la base. 
+
+```{r}
+#setwd("~/R Ladies")
+base=read.csv("test.csv")
+str(base)
+View(base)
+attach(base)
+```
+
+Para aprovechar que la base contiene NA, recordemos cómo eliminar NAs.
+
+```{r}
+any(is.na(base))
+base.2=na.omit(base)
+any(is.na(base.2))
+```
+
+2. Seleccionar. 
+
+```{r}
+library(tidyverse)
+library(readr)
+base %>%  
+   filter(bedrooms == 2)
+   filter(tipovivi1 == 1) %>% 
+```
+
+3. Suma y media. 
+
+```{r}
+base %>% 
+     filter(tipovivi1 == 1) %>% 
+        summarize(total_tipovivi1 = table(tipovivi1))
+```
+
+```{r}
+base %>% 
+     filter(tipovivi1 == 1) %>% 
+        summarize(mean_bedrooms_tipovivi1 = mean(bedrooms))
+```
+
+4. Asignar el comando a un objeto
+
+```{r}
+bed <- base %>%  
+     filter(tipovivi1 == 1) %>%
+        summarize(mean_bedrooms_tipovivi1 = mean(bedrooms))
+```
+
+5. Crear una nueva variable. 
+Nota: Limpie todo lo anterior para no tener un error. 
+
+```{r}
+base <- base %>% 
+  unite("tipo_vivienda", c("tipovivi1", "tipovivi2","tipovivi3", "tipovivi4","tipovivi5"))
+base$tipo_vivienda = as.factor(base$tipo_vivienda)
+levels(base$tipo_vivienda) = c("V1", "V2", "V3","V4","V5")
+base$tipo_vivienda
+```
+
+6. Ordenar el promedio de cuartos por vivienda. 
+
+```{r}
+ base %>%  
+   group_by(tipo_vivienda) %>%
+     summarize(mean_bedrooms_viv = mean(bedrooms)) %>% 
+         arrange(desc(mean_bedrooms_viv))     
+```
+
+7. Crear base por sexo.
+```{r}
+base_mujeres <- base %>% 
+  filter(female == "1")
+```
+
+```{r}
+base_hombres <- base %>% 
+  filter(male == "1")
+```
+
+
