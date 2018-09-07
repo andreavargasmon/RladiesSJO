@@ -73,6 +73,7 @@ Seguinos:
 - [Exploremos el paquete dplyr con el conjunto de datos del BID](https://github.com/malfaro2/RladiesSJO/blob/master/IDB_data.Rmd).
 - La idea es que Uds bajen los datos, y encuentren la mejor manera de describirlos y resumirlos usando tidyverse. 
 - Datos de [test](https://github.com/malfaro2/RladiesSJO/blob/master/test.csv) y de [train](https://github.com/malfaro2/RladiesSJO/blob/master/train.csv)
+- [Código de Fabiola](https://github.com/malfaro2/RladiesSJO/blob/master/Dplyr.Rmd)
 
 
 **Próximas reuniones (2018)**
