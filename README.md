@@ -75,10 +75,14 @@ Seguinos:
 - Datos de [test](https://github.com/malfaro2/RladiesSJO/blob/master/test.csv) y de [train](https://github.com/malfaro2/RladiesSJO/blob/master/train.csv)
 - [Código de Fabiola](https://github.com/malfaro2/RladiesSJO/blob/master/Dplyr.Rmd)
 
+**Undécima reunión (Martes 9 de octubre 2018)**
+
+- Flexdashboard con R Markdown + Plotly
+- [Código flexdash1](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash.Rmd)
+- [Código flexdash2](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash2.Rmd)
 
 **Próximas reuniones (2018)**
 
-- Martes 9 de octubre
 - Martes 6 de noviembre
 - Martes 4 de diciembre
 
