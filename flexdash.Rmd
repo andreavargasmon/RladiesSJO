@@ -1,0 +1,58 @@
+---
+title: "Ejemplo 1. Orientación en columnas o filas"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plotly)
+
+set.seed(955)
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+            geom_point(shape=1)      # Use circulos 
+ggplotly(p)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+            geom_point(shape=1) +    # circulo para las observaciones 
+            geom_smooth(method=lm)   # añade línea de regresión
+ggplotly(p)
+```
+
+### Chart C
+
+```{r}
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+            geom_point(shape=1) +     
+            geom_smooth()            # añade zona sombreada para intervalos de confianza de valores ajustados
+ggplotly(p)
+```
+
+
+
+Digamos, por ejemplo, que nos gustaría mostrar información cuando se desplaza sobre los puntos, pero no cuando se desplaza sobre los valores ajustados o los límites de error. Se hace fácilmente en plotly.js estableciendo el atributo hoverinfo en "none". Dado que los valores ajustados o los límites de error están contenidos en la segunda y tercera trazas, podemos ocultar la información solo en estas trazas usando el tracesatributo en la style() función. En términos generales, la style()función está diseñada para modificar los valores de los atributos de traza (s) dentro de un objeto de trazado, que es principalmente útil para personalizar los valores predeterminados producidos a través de ggplotly().
+
+style(p, hoverinfo = "none", traces = 2:3)
