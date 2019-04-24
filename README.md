@@ -81,6 +81,11 @@ Seguinos:
 - [Código flexdash1](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash.Rmd)
 - [Código flexdash2](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash2.Rmd)
 
+**Duodécima reunión (Miércoles 25 de abril 2018)**
+
+- [Uso de purrr](https://github.com/malfaro2/RladiesSJO/blob/master/purrr_law_of_large_numbers_rladies.pdf)
+
+
 **Próximas reuniones (2018)**
 
 - Martes 6 de noviembre
