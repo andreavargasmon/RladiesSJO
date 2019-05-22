@@ -81,16 +81,19 @@ Seguinos:
 - [Código flexdash1](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash.Rmd)
 - [Código flexdash2](https://github.com/malfaro2/RladiesSJO/blob/master/flexdash2.Rmd)
 
-**Duodécima reunión (Miércoles 25 de abril 2018)**
+**Duodécima reunión (Miércoles 25 de abril 2019)**
 
 - [Uso de purrr](https://github.com/malfaro2/RladiesSJO/blob/master/purrr_law_of_large_numbers_rladies.pdf)
 
+**Decimotercera reunión (Miércoles 22 de mayo 2019)**
 
-**Próximas reuniones (2018)**
+- [Introducción a los modelos Bayesianos con R](https://github.com/serilo/Rladies)
 
-- Martes 6 de noviembre
-- Martes 4 de diciembre
+**Próximas reuniones (2019)**
 
-Lugar: Sala de Orientación Bibliográfica, III nivel de la Biblioteca Tinoco, Universidad de Costa Rica.
+- Miércoles 19 de junio de noviembre
+- Martes 24 de julio
+
+Lugar: Aula 300B, Facultad de Ciencias Económicas, Universidad de Costa Rica.
 
 
