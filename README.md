@@ -89,11 +89,13 @@ Seguinos:
 
 - [Introducción a los modelos Bayesianos con R](https://github.com/serilo/Rladies)
 
-**Próximas reuniones (2019)**
+**Decimocuarta reunión (Jueves 26 de setiembre 2019)**
 
-- Miércoles 19 de junio de noviembre
-- Martes 24 de julio
+-[Introducción a Bookdown] (https://github.com/malfaro2/RladiesSJO/blob/master/intro%20bookdown.Rmd)
 
-Lugar: Aula 300B, Facultad de Ciencias Económicas, Universidad de Costa Rica.
+Lugar: Aula 300A, Facultad de Ciencias Económicas, Universidad de Costa Rica 
 
+**Próximas reuniones** 
+
+Octubre 2019
 
