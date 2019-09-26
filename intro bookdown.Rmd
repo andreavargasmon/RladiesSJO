@@ -1,0 +1,455 @@
+---
+title: "Introducción a Bookdown"
+subtitle: "RLadies San José CR"
+author: "Andrea Vargas"
+date: "Setiembre 2019"
+output:
+  xaringan::moon_reader:
+    css: ["kunoichi","ninjutsu"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: center, middle
+
+![](https://bookdown.org/yihui/bookdown/images/logo.png)
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+# ¿Qué es bookdown?
+
+---
+class: middle center bg-main1
+
+## Es una herramienta simple para crear libros utilizando R-RStudio 
+
+
+---
+## Estructura básica de bookdown
+<br>
+### - Múltiples documentos de RMarkdown 
+<br>
+### - Imágenes 
+<br>
+### - HTML: Shinny apps o HTML widgets
+<br>
+### - Referencias de texto, figuras, ecuaciones, etc.
+
+---
+
+class: split-33 with-thick-border 
+
+.column.bg-main1[.content.vmiddle[
+# Primero instalemos bookdown
+]]
+.column[.content[
+## Puede solamente escribir:
+```{}
+---
+install.packages("bookdown")
+---
+```
+## O descargar la versión en desarrollo desde GitHub
+```{}
+devtools::install_github('rstudio/bookdown')
+```
+
+
+]]
+
+---
+
+
+class: bg-main1 split-30 hide-slide-number
+
+.column.bg-main3[
+]
+.column.slide-in-right[
+.sliderbox.bg-main2.vmiddle[
+.font5[Creemos un libro]
+]]
+
+
+---
+
+class: middle bg-main1
+
+
+## 1. Abran un nuevo proyecto en RStudio 
+
+<br>
+
+## 2. Book project using bookdown
+
+</br>
+
+## 3. Nombren su libro y decidan la ubicación de su proyecto
+
+
+---
+
+class: split-three white center
+
+.row.bg-main1[.content.vmiddle[
+# ¿Les aparecieros .yellow[muchos] archivos cierto?
+]]
+.row.bg-main2[.content.vmiddle[
+# No se preocupen:
+]]
+.row.bg-main3[.content.vmiddle[
+# .light-blue[bookdown] crea algunos archivos para guiarnos y otros necesarios para el libro
+]]
+
+
+---
+
+#Archivos
+
+```{}
+directory/
+├── .Rproj.user
+├── book.Rproj
+├── 01-intro.Rmd
+├── 02-literature.Rmd
+├── 03-method.Rmd
+├── 04-application.Rmd
+├── 05-summary.Rmd
+├── 06-references.Rmd
+├──  README.md
+├── _bookdown.yml
+├── _output.yml
+├──  book.bib
+├──  index.Rmd # YAML + Chapter 1
+├──  preamble.tex
+└──  style.css
+```
+
+---
+class: bg-main1 center middle hide-slide-number
+.reveal-text.bg-main2[.pad1[
+.font4[Rendericemos el libro]
+]]
+---
+class: inverse, center, middle
+#NO "KNITEEN"
+![](https://media.giphy.com/media/PGJUy3mPmO4ak/giphy.gif)
+---
+class: bg-main2 center middle
+
+# Hay tres opciones:
+
+## 1. Addins -> BOOKDOWN: Preview Book
+## 2. Build -> Build Book
+## 3. bookdown::render_book('index.Rmd')
+
+---
+class: bg-main3 middle
+
+#Noten que se crearon 3 archivos nuevos
+```{}
+├──  _book
+├──  _bookdown_files
+└──  packages.bib
+```
+
+---
+
+class: bg-main1
+
+<br>
+#Estructura
+<br>
+## - Prefacio: index.Rmd
+## - Cuerpo: archivos .Rmd
+## - Publicación:  _bookdown.yml y _output.yml
+
+---
+
+class: bg-main3
+
+.reveal-text.bg-main2[.pad1[
+.font4[index.Rmd]
+]]
+
+### Aquí pueden controlar aspectos importantes como el título, subtítulo, autor, fecha, descripción, entre otros. 
+```{}
+--- 
+title: "A Minimal Book Example" 
+author: "Yihui Xie" 
+date: "2019-01-16" 
+site: bookdown::bookdown_site 
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example..."
+---
+
+```
+
+---
+
+class: bg-main2
+
+.reveal-text.bg-main3[.pad1[
+.font4[Cuerpo: .Rmd]
+]]
+## En nuestro caso:
+
+```{}
+1. index.Rmd
+2. 01-intro
+3. 02-literature
+4. 03-03-method
+5. 04-application
+6. 05-summary
+7. 06-references
+```
+
+---
+class: split-two white
+
+.column.bg-main1[.content[
+# Etiquetas y referencias 
+<br>
+index.Rmd
+```{}
+# Prerequisites {-#pre} 
+This is a _sample_ book written in **Markdown**.
+```
+
+01-intro.Rmd
+```{}
+# Introduction {#intro}
+Next we review the [literature](#lit)...
+```
+
+02-literature.Rmd
+```{}
+# Literature {#lit}
+Following Chapter \@ref(intro),...
+```
+
+]]
+.column.bg-main2[.content[
+# Resultado
+<br><br>
+# Prerequisites 
+This is a _sample_ book written in **Markdown**.
+<br><br><br><br>
+# Introduction 
+Next we review the [literature](#lit)...
+<br><br><br><br>
+# Literature 
+Following Chapter 1,...
+]]
+
+---
+class: bg-main3 
+# Figuras
+```{}
+'''{r graf1, fig.cap='Grafico'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+'''
+```
+
+
+```{r,echo=FALSE, out.width = '200px', fig.cap='Fig.1:Grafico'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+
+---
+# Referencias figuras
+```{}
+See Figure \@ref(fig:graf1).
+```
+<br>
+See Figure 1
+<br><br><br><br><br><br>
+Otras opcioness: \@ref(tab:tabla1), \@ref(eq:ecuacion1), \@ref(thm:teorema1)
+
+---
+class: bg-main2 center middle 
+
+.reveal-text.bg-main3[.pad1[
+.font3[Ahora es su turno, editen los capítulos y utilicen algunos de los elementos mencionados]
+]]
+
+---
+class: bg-main1
+
+# Existen capítulos, subcapítulos y "partes"
+
+### Ya ustedes tienen capítulos y subcapítulos. Ahora veamos las partes:
+
+En 01-intro.Rmd escriban: 
+```{}
+# (PART) Act one {-}
+# Introduction
+```
+
+
+En 03-methods.Rmd escriban:
+```{}
+# (PART) Act two {-}
+# Methods
+```
+
+Si no quieren que se enumeren las partes:
+```{}
+# (PART\*) Act one {-}
+```
+
+---
+class: bg-main3
+
+.reveal-text.bg-main1[.pad1[
+.font3[Apéndice]
+]]
+
+## Son las últimas palabras de su libro 
+
+En 05-summary.Rmd:
+```{}
+# (APPENDIX) Other stuff {-}
+# Final Words
+```
+
+
+---
+class: bg-main2
+
+.reveal-text.bg-main3[.pad1[
+.font2[Estilo]
+]]
+
+Se puede hacer con css si su formato final es .html. También hay opciones predeterminadas:
+- bookdown::gitbook es el default
+- bookdown::html_book
+- bookdown::pdf_book
+- bookdown::tufte_html_book
+- bookdown::tufte_book2
+
+En el caso de html_book pueden cambiarle además el estilo:
+
+- theme: default
+- theme: cerulean
+- theme: journal
+- theme: flatly
+- theme: darkly
+- theme: readable
+- theme: spacelab
+- theme: united
+- theme: cosmo
+- theme: lumen
+- theme: paper
+- theme: sandstone
+- theme: simplex
+- theme: yeti
+
+---
+class: bg-main1 center middle 
+
+.reveal-text.bg-main2[.pad1[
+.font4[Algunos detalles importantes]
+]]
+
+---
+
+
+class: split-two white
+
+.column.bg-main1[.content[
+# Recodemos un poco de syntax de   .yellow[Markdown] 
+<br>
+## Títulos
+```{}
+# Título de primer nivel
+
+## Título de segundo nivel
+
+### Título de tercer nivel
+```
+
+# Título de primer nivel
+
+## Título de segundo nivel
+
+### Título de tercer nivel
+
+]]
+.column.bg-main2[.content.vmiddle[
+## Listas
+```{}
+Pueden empezar con (*, - o +) 
+y pueden identarse
+- item
+- item
+- item
+    - item
+    - item
+```
+- item
+- item
+- item
+    - item
+    - item
+]]
+
+---
+
+class: middle bg-main1
+#LateX
+
+## Algunos ejemplos
+```{}
+$f(k) =  p^{k} (1-p)^{1-k}$
+$$f(k) =  p^{k} (1-p)^{1-k}$$
+```
+$f(k) =  p^{k} (1-p)^{1-k}$
+$$f(k) =  p^{k} (1-p)^{1-k}$$
+```{}
+$$\begin{pmatrix}
+\alpha & \beta\\
+\gamma & \delta
+\end{pmatrix}$$
+```
+$$\begin{pmatrix}
+\alpha & \beta\\
+\gamma & \delta
+\end{pmatrix}$$
+
+---
+   
+<br><br><br><br>   
+
+### Si quieren más información sobre bookdown vayan al  <a href="https://bookdown.org/yihui/bookdown/">tutorial completo de bookdown</a> creado por Yihui Xie
+
+---
+# ¡Muchas gracias!
+
+
+![](https://i.gifer.com/zSa.gif)
+
+### Sígannos en Instagram: <a href="https://www.instagram.com/rladies_sjcr/">@rladies_sjcr</a>
+### y en Twitter: <a href="https://twitter.com/RladiesCR">@RladiesCR</a>
+### Búsquennos en Facebook: <a href="https://www.facebook.com/R-Ladies-San-José-CR-113831192660935/?ref=bookmarks">R-Ladies San José CR</a>
+
+---
+class: bg-main1 center middle
+
+### Si tienen comentarios acerca del taller o sobre temas para futuras reuniones también nos pueden escribir al correo: 
+### sanjosecr@rladies.org
+---
+## ¡Las esperamos ver en la próxima reunión! 
+
+![](https://i.gifer.com/8Fvq.gif)
+---
