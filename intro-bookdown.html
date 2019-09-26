@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introducción a Bookdown</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andrea Vargas" />
+    <link href="libs/remark-css/kunoichi.css" rel="stylesheet" />
+    <link href="libs/remark-css/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción a Bookdown
+## RLadies San José CR
+### Andrea Vargas
+### Setiembre 2019
+
+---
+
+class: center, middle
+
+![](https://bookdown.org/yihui/bookdown/images/logo.png)
+
+
+
+
+# ¿Qué es bookdown?
+
+---
+class: middle center bg-main1
+
+## Es una herramienta simple para crear libros utilizando R-RStudio 
+
+
+---
+## Estructura básica de bookdown
+&lt;br&gt;
+### - Múltiples documentos de RMarkdown 
+&lt;br&gt;
+### - Imágenes 
+&lt;br&gt;
+### - HTML: Shinny apps o HTML widgets
+&lt;br&gt;
+### - Referencias de texto, figuras, ecuaciones, etc.
+
+---
+
+class: split-33 with-thick-border 
+
+.column.bg-main1[.content.vmiddle[
+# Primero instalemos bookdown
+]]
+.column[.content[
+## Puede solamente escribir:
+```{}
+---
+install.packages("bookdown")
+---
+```
+## O descargar la versión en desarrollo desde GitHub
+```{}
+devtools::install_github('rstudio/bookdown')
+```
+
+
+]]
+
+---
+
+
+class: bg-main1 split-30 hide-slide-number
+
+.column.bg-main3[
+]
+.column.slide-in-right[
+.sliderbox.bg-main2.vmiddle[
+.font5[Creemos un libro]
+]]
+
+
+---
+
+class: middle bg-main1
+
+
+## 1. Abran un nuevo proyecto en RStudio 
+
+&lt;br&gt;
+
+## 2. Book project using bookdown
+
+&lt;/br&gt;
+
+## 3. Nombren su libro y decidan la ubicación de su proyecto
+
+
+---
+
+class: split-three white center
+
+.row.bg-main1[.content.vmiddle[
+# ¿Les aparecieros .yellow[muchos] archivos cierto?
+]]
+.row.bg-main2[.content.vmiddle[
+# No se preocupen:
+]]
+.row.bg-main3[.content.vmiddle[
+# .light-blue[bookdown] crea algunos archivos para guiarnos y otros necesarios para el libro
+]]
+
+
+---
+
+#Archivos
+
+```{}
+directory/
+├── .Rproj.user
+├── book.Rproj
+├── 01-intro.Rmd
+├── 02-literature.Rmd
+├── 03-method.Rmd
+├── 04-application.Rmd
+├── 05-summary.Rmd
+├── 06-references.Rmd
+├──  README.md
+├── _bookdown.yml
+├── _output.yml
+├──  book.bib
+├──  index.Rmd # YAML + Chapter 1
+├──  preamble.tex
+└──  style.css
+```
+
+---
+class: bg-main1 center middle hide-slide-number
+.reveal-text.bg-main2[.pad1[
+.font4[Rendericemos el libro]
+]]
+---
+class: inverse, center, middle
+#NO "KNITEEN"
+![](https://media.giphy.com/media/PGJUy3mPmO4ak/giphy.gif)
+---
+class: bg-main2 center middle
+
+# Hay tres opciones:
+
+## 1. Addins -&gt; BOOKDOWN: Preview Book
+## 2. Build -&gt; Build Book
+## 3. bookdown::render_book('index.Rmd')
+
+---
+class: bg-main3 middle
+
+#Noten que se crearon 3 archivos nuevos
+```{}
+├──  _book
+├──  _bookdown_files
+└──  packages.bib
+```
+
+---
+
+class: bg-main1
+
+&lt;br&gt;
+#Estructura
+&lt;br&gt;
+## - Prefacio: index.Rmd
+## - Cuerpo: archivos .Rmd
+## - Publicación:  _bookdown.yml y _output.yml
+
+---
+
+class: bg-main3
+
+.reveal-text.bg-main2[.pad1[
+.font4[index.Rmd]
+]]
+
+### Aquí pueden controlar aspectos importantes como el título, subtítulo, autor, fecha, descripción, entre otros. 
+```{}
+--- 
+title: "A Minimal Book Example" 
+author: "Yihui Xie" 
+date: "2019-01-16" 
+site: bookdown::bookdown_site 
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example..."
+---
+
+```
+
+---
+
+class: bg-main2
+
+.reveal-text.bg-main3[.pad1[
+.font4[Cuerpo: .Rmd]
+]]
+## En nuestro caso:
+
+```{}
+1. index.Rmd
+2. 01-intro
+3. 02-literature
+4. 03-03-method
+5. 04-application
+6. 05-summary
+7. 06-references
+```
+
+---
+class: split-two white
+
+.column.bg-main1[.content[
+# Etiquetas y referencias 
+&lt;br&gt;
+index.Rmd
+```{}
+# Prerequisites {-#pre} 
+This is a _sample_ book written in **Markdown**.
+```
+
+01-intro.Rmd
+```{}
+# Introduction {#intro}
+Next we review the [literature](#lit)...
+```
+
+02-literature.Rmd
+```{}
+# Literature {#lit}
+Following Chapter \@ref(intro),...
+```
+
+]]
+.column.bg-main2[.content[
+# Resultado
+&lt;br&gt;&lt;br&gt;
+# Prerequisites 
+This is a _sample_ book written in **Markdown**.
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# Introduction 
+Next we review the [literature](#lit)...
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# Literature 
+Following Chapter 1,...
+]]
+
+---
+class: bg-main3 
+# Figuras
+```{}
+'''{r graf1, fig.cap='Grafico'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+'''
+```
+
+
+&lt;div class="figure"&gt;
+&lt;img src="intro-bookdown_files/figure-html/unnamed-chunk-1-1.png" alt="Fig.1:Grafico" width="200px" /&gt;
+&lt;p class="caption"&gt;Fig.1:Grafico&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+# Referencias figuras
+```{}
+See Figure \@ref(fig:graf1).
+```
+&lt;br&gt;
+See Figure 1
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Otras opcioness: \@ref(tab:tabla1), \@ref(eq:ecuacion1), \@ref(thm:teorema1)
+
+---
+class: bg-main2 center middle 
+
+.reveal-text.bg-main3[.pad1[
+.font3[Ahora es su turno, editen los capítulos y utilicen algunos de los elementos mencionados]
+]]
+
+---
+class: bg-main1
+
+# Existen capítulos, subcapítulos y "partes"
+
+### Ya ustedes tienen capítulos y subcapítulos. Ahora veamos las partes:
+
+En 01-intro.Rmd escriban: 
+```{}
+# (PART) Act one {-}
+# Introduction
+```
+
+
+En 03-methods.Rmd escriban:
+```{}
+# (PART) Act two {-}
+# Methods
+```
+
+Si no quieren que se enumeren las partes:
+```{}
+# (PART\*) Act one {-}
+```
+
+---
+class: bg-main3
+
+.reveal-text.bg-main1[.pad1[
+.font3[Apéndice]
+]]
+
+## Son las últimas palabras de su libro 
+
+En 05-summary.Rmd:
+```{}
+# (APPENDIX) Other stuff {-}
+# Final Words
+```
+
+
+---
+class: bg-main2
+
+.reveal-text.bg-main3[.pad1[
+.font2[Estilo]
+]]
+
+Se puede hacer con css si su formato final es .html. También hay opciones predeterminadas:
+- bookdown::gitbook es el default
+- bookdown::html_book
+- bookdown::pdf_book
+- bookdown::tufte_html_book
+- bookdown::tufte_book2
+
+En el caso de html_book pueden cambiarle además el estilo:
+
+- theme: default
+- theme: cerulean
+- theme: journal
+- theme: flatly
+- theme: darkly
+- theme: readable
+- theme: spacelab
+- theme: united
+- theme: cosmo
+- theme: lumen
+- theme: paper
+- theme: sandstone
+- theme: simplex
+- theme: yeti
+
+---
+class: bg-main1 center middle 
+
+.reveal-text.bg-main2[.pad1[
+.font4[Algunos detalles importantes]
+]]
+
+---
+
+
+class: split-two white
+
+.column.bg-main1[.content[
+# Recodemos un poco de syntax de   .yellow[Markdown] 
+&lt;br&gt;
+## Títulos
+```{}
+# Título de primer nivel
+
+## Título de segundo nivel
+
+### Título de tercer nivel
+```
+
+# Título de primer nivel
+
+## Título de segundo nivel
+
+### Título de tercer nivel
+
+]]
+.column.bg-main2[.content.vmiddle[
+## Listas
+```{}
+Pueden empezar con (*, - o +) 
+y pueden identarse
+- item
+- item
+- item
+    - item
+    - item
+```
+- item
+- item
+- item
+    - item
+    - item
+]]
+
+---
+
+class: middle bg-main1
+#LateX
+
+## Algunos ejemplos
+```{}
+$f(k) =  p^{k} (1-p)^{1-k}$
+$$f(k) =  p^{k} (1-p)^{1-k}$$
+```
+`\(f(k) =  p^{k} (1-p)^{1-k}\)`
+`$$f(k) =  p^{k} (1-p)^{1-k}$$`
+```{}
+$$\begin{pmatrix}
+\alpha &amp; \beta\\
+\gamma &amp; \delta
+\end{pmatrix}$$
+```
+`$$\begin{pmatrix}
+\alpha &amp; \beta\\
+\gamma &amp; \delta
+\end{pmatrix}$$`
+
+---
+   
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;   
+
+### Si quieren más información sobre bookdown vayan al  &lt;a href="https://bookdown.org/yihui/bookdown/"&gt;tutorial completo de bookdown&lt;/a&gt; creado por Yihui Xie
+
+---
+# ¡Muchas gracias!
+
+
+![](https://i.gifer.com/zSa.gif)
+
+### Sígannos en Instagram: &lt;a href="https://www.instagram.com/rladies_sjcr/"&gt;@rladies_sjcr&lt;/a&gt;
+### y en Twitter: &lt;a href="https://twitter.com/RladiesCR"&gt;@RladiesCR&lt;/a&gt;
+### Búsquennos en Facebook: &lt;a href="https://www.facebook.com/R-Ladies-San-José-CR-113831192660935/?ref=bookmarks"&gt;R-Ladies San José CR&lt;/a&gt;
+
+---
+class: bg-main1 center middle
+
+### Si tienen comentarios acerca del taller o sobre temas para futuras reuniones también nos pueden escribir al correo: 
+### sanjosecr@rladies.org
+---
+## ¡Las esperamos ver en la próxima reunión! 
+
+![](https://i.gifer.com/8Fvq.gif)
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
