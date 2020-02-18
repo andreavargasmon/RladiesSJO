@@ -1,0 +1,465 @@
+---
+title: "ggplot2"
+subtitle: "RLadies"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+library(gradethis)
+library(parsons)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+library(RColorBrewer)
+library(wesanderson)
+library(viridis)
+tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
+
+mpg_select <- mpg[mpg$manufacturer %in% c("audi", "ford", "honda", "hyundai"), ]
+```
+
+
+## Introduccion
+
+### ¿Qué es ggplot2?
+
+Es un paquete, parte del **tidyverse**, creado por **Hadley Wickham** que tiene como principal objetivo ofrecer una herramienta que visualización de datos basada en *capas*. Está basado en la filosofía del libro *The Grammar of Graphics* de **Leland Wilkinson**.
+
+### ¿Por qué usarlo?
+
+1. Personalizable: muchas posibilidades
+
+2. Poderoso: podemos hacer **casi** cualquier gráfico
+
+3. Comunidad: muchos lo usan, por lo tanto hay mucha ayuda online
+
+### Idea
+
+Todos los gráficos se pueden resumir con esta plantilla:
+
+
+`ggplot(data = <DATOS>) +`
+
+ `<GEOM_FUNCIÓN>(mapping = aes(<MAPEOS>))`
+ 
+ 
+
+(Tomado de R4DS -> https://es.r4ds.hadley.nz/visualizaci%C3%B3n-de-datos.html)
+
+Donde `GEOM_FUNCIÓN` puede ser cualquier "objeto geométrico" que queramos agregar al gráfico, por ejemplo:
+
+* puntos (geom_point)
+
+* líneas (geom_line)
+
+* boxplot (geom_boxplot)
+
+
+### Datos de la sesión: **mpg**
+
+```{r}
+glimpse(mpg)
+```
+
+Variables:
+
+| Variable | Descripción |
+|:--------:|:-----------:|
+| `manufacturer` | Fabricante  |
+| `model`    | Modelo |
+| `displ`    | Tamaño del motor en litros |
+| `year`| Año de fabricación |
+| `cyl`  | Número de cilindros |
+| `trans`  | Tipo de transmisión |
+| `drv` | Tracción |
+| `cty` | Millas urbanas por galón |
+| `hmy` | Millas de autopista por galón |
+| `fl`  | TIpo de combustible |
+| `class` | Tipo de carro |
+
+
+## Basico 
+
+### Primera capa
+```{r 1era, exercise = TRUE}
+library(ggplot2)
+ggplot(mpg, aes(x = displ, y = cty)) 
+```
+
+
+### Ahora agreguemos capas:
+
+### Puntos 
+
+`geom_point`
+La forma más simple:
+```{r point1, exercise = TRUE }
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = cty))
+```
+
+
+### Linea 
+
+`geom_line`
+```{r line1, exercise = TRUE}
+ggplot(mpg) +
+  geom_line(aes(x = hwy, y = cty))
+```
+
+
+### Lineas de regresion
+
+`geom_smooth`
+```{r smooth1, exercise = TRUE}
+ggplot(mpg) +
+  geom_smooth(aes(x = hwy, y = cty))
+```
+
+
+### Texto
+
+`geom_text`
+
+Usamos solo 30 datos para que sea visualmente más fácil de entender
+```{r text, exercise = TRUE}
+ggplot(mpg,aes(x = displ, y = cty)) +
+  geom_text(aes(label = drv))
+```
+
+
+### Barras
+
+`geom_bar`
+```{r bar1, exercise = TRUE}
+ggplot(mpg,aes(x = cty)) +
+  geom_bar()
+```
+
+`geom_col`
+```{r col1, exercise = TRUE}
+ggplot(mpg,aes(x = hwy, y = cty)) +
+  geom_col()
+```
+
+
+### Boxplot
+
+`geom_boxplot`
+```{r box1, exercise = TRUE}
+ggplot(mpg,aes(x = hwy, y = cty, fill = manufacturer)) +
+  geom_boxplot()
+```
+
+#### Alternativa: Violin
+
+`geom_violin`
+```{r violin1, exercise = TRUE}
+ggplot(mpg,aes(x = hwy, y = cty, fill = manufacturer)) +
+  geom_violin()
+```
+
+
+### Densidad 
+
+`geom_density`
+```{r density1, exercise = TRUE}
+ggplot(mpg, aes(hwy)) +
+  geom_density()
+```
+
+
+#### Ahora hagan un grafico con algunas de las herramientas mostradas, no se vale hacer exactamente el mismo! 
+
+```{r propio1, exercise = TRUE}
+
+```
+
+
+
+## Medio
+
+### Varias capas
+
+`+`
+```{r varias, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty)) +
+  geom_smooth(aes(x=hwy, y=cty))
+```
+
+### Cambiar colores
+
+`color`
+```{r color1, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty), color = "red")
+```
+
+```{r color2, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  geom_smooth(aes(x=hwy, y=cty, color = drv))
+```
+
+`fill`
+```{r fill, exercise = TRUE}
+ggplot(mpg, aes(hwy)) +
+  geom_density(color = "purple",
+               fill = "pink")
+```
+
+
+#### Tenemos varias formas de "nombrar" colores
+
+Por nombre, como hicimos antes
+
+Con `rgb()`
+```{r rgb, exercise = TRUE}
+ggplot(mpg, aes(hwy)) +
+  geom_density(color = rgb(0.1,0.3,0.4,0.1),
+               fill = rgb(0.9,0.9,0.1,0.2))
+```
+
+Por numero
+```{r numero, exercise = TRUE}
+ggplot(mpg, aes(hwy)) +
+  geom_density(color = colors()[283],
+               fill = colors()[520])
+```
+
+Con un *Hex code* 
+```{r}
+ggplot(mpg, aes(hwy)) +
+  geom_density(color = "#89b3a2",
+               fill = "#99E1B4")
+```
+
+### Pero tambien tenemos otras opciones mas complejas:
+
+`manual`
+```{r scale, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  scale_color_manual(values=c("#69b3a2", "purple", "black"))
+```
+
+`R Color brewer` + `Viridis` (entre otras)
+```{r brewer, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  scale_color_brewer(palette = "Pastel1")
+```
+
+```{r viridis, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+scale_color_viridis(discrete=TRUE, option="magma")
+```
+
+
+`gradients` para variables continuas
+
+El default:
+```{r gradients1, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = displ))
+```
+
+Otras opciones: 
+```{r gradients2, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = displ)) +
+  scale_colour_gradient2(low = "purple", high = "blue")
+```
+
+```{r gradients3, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = displ)) +
+  scale_colour_gradientn(colours = terrain.colors(10))
+```
+
+```{r gradients4, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = displ)) +
+   scale_color_viridis(option = "D")
+```
+
+
+### Cambiar formas 
+
+```{r shape, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv, shape = fl))
+```
+
+
+### Varios graficos en uno
+
+```{r facet, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv)
+```
+
+#### Pero ahi la leyenda es innecesaria cierto? Podemos quitarla:
+
+```{r legend, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme(legend.position = "none")
+```
+
+
+### Temas
+
+`theme_bw()`
+```{r grey, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_bw()
+```
+
+`theme_minimal()`
+```{r minimal, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_minimal()
+```
+
+`theme_dark`
+```{r dark, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_dark()
+```
+
+
+#### `ggthemes` 
+
+`theme_solarized()`
+```{r solarized, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_solarized()
+```
+
+`theme_excel`
+```{r excel, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_excel()
+```
+
+`theme_economist`
+```{r economist, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  facet_wrap(~ drv) +
+  theme_economist()
+```
+
+### Titulo, subtitulo, ejes y leyenda
+
+`labs`
+```{r labs, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  labs(title = "Relacion entre millas urbanas y millas en autopista por tipo de tracción" , subtitle = "Esto es subtitulo", x = "Millas en autopista", y = "Millas urbanas", color = "Traccion")
+```
+
+#### Pero se corta el titulo! Arreglemoslo
+
+`\n`
+```{r n, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  labs(title = "Relacion entre millas urbanas y millas en autopista \npor tipo de tracción" , subtitle = "Esto es subtitulo", x = "Millas en autopista", y = "Millas urbanas", color = "Traccion")
+```
+
+### Y si queremos personalizar las etiquetas?
+
+```{r theme2, exercise = TRUE}
+ggplot(mpg) +
+  geom_point(aes(x=hwy, y=cty, color = drv)) +
+  labs(title = "Relacion entre millas urbanas y millas en autopista \npor tipo de tracción" , subtitle = "Esto es subtitulo", x = "Millas en autopista", y = "Millas urbanas", color = "Traccion") +
+  theme(
+plot.title = element_text(color="red", size=14, face="bold.italic"),
+plot.subtitle = element_text(color = "green", size=11, face = "italic"),
+axis.title.x = element_text(color="blue", size=14, face="bold"),
+axis.title.y = element_text(color="#993333", size=14, face="bold"),
+legend.title = element_text(colour = "steelblue",  face = "bold.italic", family = "Helvetica"),
+axis.text = element_text(family = "Courier", colour = "cornflowerblue", size = (10))
+)
+```
+
+#### Pero eso no asi como muy bonito... Utilicen todas las herramientas vistas en este capitulo para hacer un gráfico que les guste:
+
+```{r propio2, exercise = TRUE}
+
+```
+
+
+## Otros detalles
+
+### Tamaño que dependa de una variable
+
+Usamos una base más pequeña para que el gráfico sea más simple
+```{r jitter, exercise = TRUE}
+mpg_select <- mpg[mpg$manufacturer %in% c("audi", "ford", "honda", "hyundai"), ]
+
+ggplot(mpg_select, aes(displ, cty)) + 
+  labs(title="Tamaño del motor vs millas urbanas") + 
+  geom_jitter(aes(col=manufacturer, size=hwy)) 
+```
+
+
+### Anotar dentro del gráfico 
+
+```{r annotate, exercise = TRUE}
+ggplot(mpg_select, aes(displ, cty)) + 
+  labs(title="Tamaño del motor vs millas urbanas") + 
+  geom_jitter(aes(col=manufacturer, size=hwy)) +
+  annotate(geom="text", x=3.6, y=19.8, 
+             label="Este punto morado es importante")
+```
+
+```{r annotate2, exercise = TRUE}
+ggplot(mpg_select, aes(displ, cty)) + 
+  labs(title="Tamaño del motor vs millas urbanas") + 
+  geom_jitter(aes(col=manufacturer, size=hwy)) +
+  annotate(geom="point", x=3.3, y=19, size = 10,
+           shape = 21, fill = "transparent")
+```
+
+
+### Lineas 
+
+```{r hline, exercise = TRUE}
+ggplot(mpg_select, aes(displ, cty)) + 
+  labs(title="Tamaño del motor vs millas urbanas") + 
+  geom_jitter(aes(col=manufacturer, size=hwy)) +
+  geom_hline(yintercept = 20, color = "orange", size = .8)
+```
+
+```{r vline, exercise = TRUE}
+ggplot(mpg_select, aes(displ, cty)) + 
+  labs(title="Tamaño del motor vs millas urbanas") + 
+  geom_jitter(aes(col=manufacturer, size=hwy)) +
+  geom_vline(xintercept = 3.5, color = "orange", size = .8)
+```
+
+#### Ahora creen un gráfico que incluya al menos un elemento de cada capítulo de la sesión
+```{r propio3, exercise = TRUE}
+
+```
+
